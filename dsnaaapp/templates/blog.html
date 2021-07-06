@@ -62,23 +62,23 @@
                                         <li><a href="{% url 'home' %}"> Home</a></li>
                                         <li><a href="#">Who we are</a>
                                         <ul class="submenu">
-                                            <li><a href="elements.html">Our mission vision Values</a></li>
+                                            <li><a href="#objectives">Our Objectives</a></li>
                                             <li><a href="#team">Our Team </a></li>
-                                            <li><a href="elements.html">Partners</a></li>
+                                            <li><a href="#parnters">Our Partners</a></li>
                                         </ul>
                                         
                                     </li>
-                                    <li><a href="#">Projects</a>
+                                    <li><a href="#projects">Projects</a>
                                         <ul class="submenu">
-                                            <li><a href="elements.html">Mapping AI ECOSYSTEM</a></li>
+                                            <li><a href="elements.html">AI Map</a></li>
                                             <li><a href="elements.html">AI Network</a></li>
                                             <li><a href="elements.html">AI Quiz</a></li>
-                                            <li><a href="elements.html">AI Resource Center</a></li>
+                                            <li><a href="elements.html">AI E-library</a></li>
+                                            <li><a href="elements.html">AI Media</a></li>
                                         </ul>
                                     </li>
                                     <li><a htef="/contact"  >Media</a></li>
-                                    <li><a href="/contact"  >Agenda</a></li>
-                                    <li><a href="/contact"  >Newsletter</a></li>
+                                    <li><a href="{% url 'events' %}"  >Agenda</a></li>
                                     <li><a href="/blog">Blog</a>
                                         <ul class="submenu">
                                             <li><a href="{% url 'blog' %}">Blog</a></li>
@@ -104,7 +104,16 @@
                         </div>             
                         <div class="col-xl-1 col-lg-2 col-md-2">
                             <div class="header-right-btn f-right d-none d-lg-block">
-                                <a href="#" class="btn header-btn">Log in</a>
+                            {% if user.is_authenticated %}
+                        
+                                Welcome {{ user.username }} 
+                                <a href="{% url 'logout' %}" class="btn header-btn">Log out</a>
+                                {% else %}
+                                <div class="col-xl-0 col-lg-1 col-md-1">
+                                <a href="{% url 'login' %}" class="btn header-btn">Log in</a>
+
+                                {% endif %}
+                                </div>
                             </div>    
                         </div>
                         <!-- Mobile Menu -->

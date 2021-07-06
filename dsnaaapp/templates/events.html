@@ -14,11 +14,11 @@
 
 		<!-- CSS here -->
             <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
-        
-         
+            <link rel="stylesheet" href="{% static '/css/owl.carousel.min.css' %}">
+            <link rel="stylesheet" href="{% static '/css/flaticon.css' %}">
             <link rel="stylesheet" href="{% static '/css/slicknav.css' %}">
-           <link rel="stylesheet" href="{% static 'registration/css/Latest-Events.css' %}">
-            
+            <link rel="stylesheet" href="{% static '/css/animate.min.css' %}">
+            <link rel="stylesheet" href="{% static '/css/magnific-popup.css' %}">
             <link rel="stylesheet" href="{% static '/css/fontawesome-all.min.css' %}">
             <link rel="stylesheet" href="{% static '/css/themify-icons.css' %}">
             <link rel="stylesheet" href="{% static '/css/slick.css' %}">
@@ -64,7 +64,7 @@
                                         <ul class="submenu">
                                             <li><a href="#objectives">Our Objectives</a></li>
                                             <li><a href="#team">Our Team </a></li>
-                                            <li><a href="elements.html">Our Partners</a></li>
+                                            <li><a href="#parnters">Our Partners</a></li>
                                         </ul>
                                         
                                     </li>
@@ -78,7 +78,7 @@
                                         </ul>
                                     </li>
                                     <li><a htef="/contact"  >Media</a></li>
-                                    <li><a href="/contact"  >Agenda</a></li>
+                                    <li><a href="{% url 'events' %}"  >Agenda</a></li>
                                     <li><a href="/blog">Blog</a>
                                         <ul class="submenu">
                                             <li><a href="{% url 'blog' %}">Blog</a></li>
