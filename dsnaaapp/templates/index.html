@@ -1,4 +1,3 @@
-
 {% load static %}
 {% load i18n %}
 <!doctype html>
@@ -25,6 +24,7 @@
             <link rel="stylesheet" href="{% static '/css/slick.css' %}">
             <link rel="stylesheet" href="{% static '/css/nice-select.css' %}">
             <link rel="stylesheet" href="{% static '/css/style.css' %}">
+            <link rel="stylesheet" href="{% static '/css/dsnaa.css' %}">
    </head>
 
    <body>
@@ -51,7 +51,7 @@
                         <!-- Logo -->
                         <div class="col-xl-1 col-lg-1 col-md-1">
                             <div class="logo">
-                                <a href="{% url 'home' %}"><img src="{% static '/img/logo/logo.png' %}" alt="DSNAA" height="110" width="160" ></a>
+                                <a href="{% url 'home' %}"><img class="logo" src="{% static '/img/logo/logo.png' %}" alt="DSNAA" height="90" width="130" ></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10 col-md-10">
@@ -59,41 +59,62 @@
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav> 
                                     <ul id="navigation">    
-                                        <li><a href="index.html"> Home</a></li>
+                                        <li><a href="{% url 'home' %}"> Home</a></li>
                                         <li><a href="#">Who we are</a>
                                         <ul class="submenu">
-                                            <li><a href="elements.html">Our mission vision Values</a></li>
-                                            <li><a href="elements.html">Our Team </a></li>
-                                            <li><a href="elements.html">Partners</a></li>
+                                            <li><a href="#objectives">Our Objectives</a></li>
+                                            <li><a href="#team">Our Team </a></li>
+                                            <li><a href="elements.html">Our Partners</a></li>
                                         </ul>
+                                        
                                     </li>
-                                    <li><a href="#">Projects</a>
+                                    <li><a href="#projects">Projects</a>
                                         <ul class="submenu">
-                                            <li><a href="elements.html">Mapping AI ECOSYSTEM</a></li>
+                                            <li><a href="elements.html">AI Map</a></li>
                                             <li><a href="elements.html">AI Network</a></li>
                                             <li><a href="elements.html">AI Quiz</a></li>
-                                            <li><a href="elements.html">AI Resource Center</a></li>
+                                            <li><a href="elements.html">AI E-library</a></li>
+                                            <li><a href="elements.html">AI Media</a></li>
                                         </ul>
                                     </li>
-                                    <li><a routerLink="/contact"  >Media</a></li>
-                                    <li><a routerLink="/contact"  >Agenda</a></li>
-                                    <li><a routerLink="/contact"  >Newsletter</a></li>
-                                    <li><a routerLink="/blog">Blog</a>
+                                    <li><a htef="/contact"  >Media</a></li>
+                                    <li><a href="{% url 'events' %}"  >Agenda</a></li>
+                                    <li><a href="/blog">Blog</a>
                                         <ul class="submenu">
-                                            <li><a href="blog.html">Blog</a></li>
+                                            <li><a href="{% url 'blog' %}">Blog</a></li>
                                             <li><a href="single-blog.html">Blog Details</a></li>
                                         </ul>
                                     </li>
-                    
-                                    <li><a routerLink="/contact"  >Contact</a></li>
+                                    <li><a href="{% url 'contact' %}"  >Contact</a></li>
+                                    <li><a href=""><i class="fa fa-language" aria-hidden="true"></i></a>
+                                        <ul class="submenu">
+                                        {% get_current_language as LANGUAGE_CODE %}
+                                            {% get_available_languages as LANGUAGES %}
+                                            {% get_language_info_list for LANGUAGES as languages %}
+
+                                            {% for lang in languages %}
+                                            <li><a href="/{{ lang.code }}/">{{ lang.name_local }}</a></li>
+                                         {% endfor %}
+                                        </ul>
+                                    </li>
                                 </ul>
+                                
                                 </nav>
                             </div>
                         </div>             
                         <div class="col-xl-1 col-lg-2 col-md-2">
                             <div class="header-right-btn f-right d-none d-lg-block">
-                                <a href="#" class="btn header-btn">Log in</a>
-                            </div>
+                            {% if user.is_authenticated %}
+                        
+                                Welcome {{ user.username }} 
+                                <a href="{% url 'logout' %}" class="btn header-btn">Log out</a>
+                                {% else %}
+                                <div class="col-xl-0 col-lg-1 col-md-1">
+                                <a href="{% url 'login' %}" class="btn header-btn">Log in</a>
+
+                                {% endif %}
+                                </div>
+                            </div>    
                         </div>
                         <!-- Mobile Menu -->
                         <div class="col-12">
@@ -116,12 +137,12 @@
                         <div class="row d-flex align-items-center">
                             <div class="col-lg-7 col-md-9 ">
                                 <div class="hero__caption">
-                                    <h1 data-animation="fadeInLeft" data-delay=".4s">DSNAA<br> {% trans 'is an organization' %}</h1>
+                                    <br><h1 data-animation="fadeInLeft" data-delay=".4s">DSNAA<br></h1><h2> {% trans 'is an organization' %} </h2>
                                     <p data-animation="fadeInLeft" data-delay=".6s">{% blocktrans %}That develops the artificial intelligence and data science sector in North African countries and the Arab world.
                                         It aims to encourage the development of a data science ecosystem, organize national and international events, conferences and workshops, and develop partnership with other data science organizations{% endblocktrans %}</p>
                                     <!-- Hero-btn -->
                                     <div class="hero__btn" data-animation="fadeInLeft" data-delay=".8s">
-                                        <a href="industries.html" class="btn hero-btn">Contact Us</a>
+                                        <a href="{% url 'contact' %}" class="btn hero-btn">Contact Us</a>
                                     </div>
                                 </div>
                             </div>
@@ -138,11 +159,11 @@
                         <div class="row d-flex align-items-center">
                             <div class="col-lg-7 col-md-9 ">
                                 <div class="hero__caption">
-                                    <h1 data-animation="fadeInLeft" data-delay=".4s">We Collect<br> High Quality Leads</h1>
+                                    <h1 data-animation="fadeInLeft" data-delay=".4s">We Collect<br> {% trans 'is an organization' %}</h1>
                                     <p data-animation="fadeInLeft" data-delay=".6s">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravi.</p>
                                     <!-- Hero-btn -->
                                     <div class="hero__btn" data-animation="fadeInLeft" data-delay=".8s">
-                                        <a href="industries.html" class="btn hero-btn">Contact Us</a>
+                                        <a href="{% url 'contact' %}" class="btn hero-btn">Contact Us</a>
                                     </div>
                                 </div>
                             </div>
@@ -158,13 +179,13 @@
         </div>
         <!-- Slider Area End-->
         <!-- What We do start-->
-        <div class="what-we-do we-padding">
+        <!-- <div class="what-we-do we-padding">
             <div class="container">
-                <!-- Section-tittle -->
+              
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8">
                         <div class="section-tittle text-center">
-                            <h2>What We Will Do For Your Business​</h2>
+                            <h2>Our Mission Values</h2>
                         </div>
                     </div>
                 </div>
@@ -213,10 +234,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- What We do End-->
         <!-- We Create Start -->
-        <div class="we-create-area create-padding">
+        <div id="objectives" class="we-create-area create-padding">
             <div class="container">
                 <div class="row d-flex align-items-end">
                     <div class="col-lg-6 col-md-12">
@@ -226,9 +247,16 @@
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <div class="we-create-cap">
-                            <h3>We Create a Steps to Build a Successful Digital Product</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis orem ipsum dolor sit amet, consectetur adipiscing.</p>
-                            <a href="#" class="btn">Contact Us</a>
+                            <h3>Our Objectives</h3>
+                           <p>Our Mission is to empower people and governments to embrace Artificial Intelligence so they can impact their communities and promote a Data-Driven economies (vision) through a humain and trustworthy technologies (Values)</p>
+                           <p><i class="fa fa-check" aria-hidden="true"></i> Helping North African countries and the Arab world to build AI strategies.</p>
+                           <p><i class="fa fa-check" aria-hidden="true"></i> Building the capacity of researchers, students and youth in data science issues</p>
+                           <p><i class="fa fa-check" aria-hidden="true"></i> Encouraging cooperation between industry, universities, and scientific research sectors.</p>
+                           <p><i class="fa fa-check" aria-hidden="true"></i> Promoting research activities related to data science in North African countries and the Arab world.</p>
+                           <p><i class="fa fa-check" aria-hidden="true"></i> Foster the promotion of AI ecosystem in North Africa and Arab countries.<p>
+                           <p><i class="fa fa-check" aria-hidden="true"></i> Raising awareness about data science among governments, women and youth.</p>
+                           <p><i class="fa fa-check" aria-hidden="true"></i> Supporting the implementation of Ai “uses-cases” in both public and private sector</p>
+                           <p><i class="fa fa-check" aria-hidden="true"></i> Organizing national and international events, conferences and workshops related to data science.</p>
                         </div>
                     </div>
                 </div>
@@ -236,9 +264,9 @@
         </div>
         <!-- We Create End -->
         <!-- Generating Start -->
-        <div class="generating-area ">
+        <!--<div class="generating-area ">
             <div class="container">
-                 <!-- Section-tittle -->
+                
                  <div class="row d-flex justify-content-center">
                     <div class="col-lg-8">
                         <div class="section-tittle text-center">
@@ -297,12 +325,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Generating End -->
         <!--Choose Best start-->
-        <div class="choose-best choose-padding">
+       <!-- <div class="choose-best choose-padding">
             <div class="container">
-                <!-- Section-tittle -->
+               
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-7">
                         <div class="section-tittle text-center">
@@ -361,16 +389,16 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Choose Best do End-->
         <!-- Visit Stuffs Start -->
-        <div class="visit-area fix visite-padding">
-            <div class="container">
-                <!-- Section-tittle -->
+       <!----> <div id="projects" class="visit-area fix visite-padding">
+            <div  class="container">
+             
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-6 pr-0">
                         <div class="section-tittle text-center">
-                            <h2>Visit Some Of Our Awsome Stuffs</h2>
+                            <h2>Our Parnters</h2>
                         </div>
                     </div>
                 </div>
@@ -383,7 +411,7 @@
                                 <img src="{% static '/img/visit/visit_1.jpg' %}" alt="">
                             </div>
                             <div class="visited-cap">
-                                <h3><a href="#">citmv.com</a></h3>
+                                <h3><a href="#">AI Library</a></h3>
                                 <p>Email Marketing</p>
                             </div>
                         </div>
@@ -394,7 +422,7 @@
                                 <img src="{% static '/img/visit/visit_2.jpg' %}" alt="">
                             </div>
                             <div class="visited-cap">
-                                <h3><a href="#">mvsp.net</a></h3>
+                                <h3><a href="#">AI Network</a></h3>
                                 <p>Email Marketing</p>
                             </div>
                         </div>
@@ -423,17 +451,17 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <!-- Visit Stuffs Start -->
          <!-- Testimonial Start -->
-         <div class="testimonial-area">
+         <div  class="testimonial-area">
             <div class="container">
                <div class="testimonial-main">
                     <!-- Section-tittle -->
                     <div class="row d-flex justify-content-center">
                         <div class="col-lg-5  col-md-8 pr-0">
                             <div class="section-tittle text-center">
-                                <h2>What Client Say About Us</h2>
+                                <h2>Our Projects</h2>
                             </div>
                         </div>
                     </div>
@@ -444,15 +472,15 @@
                                     <div class="single-testimonial text-center">
                                         <div class="testimonial-caption ">
                                             <div class="testimonial-top-cap">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
+                                                <p>AI Library</p>
                                             </div>
                                             <!-- founder -->
                                             <div class="testimonial-founder d-flex align-items-center justify-content-center">
                                                 <div class="founder-img">
-                                                    <img src="{% static '/img/testmonial/testimonial.png' %}" alt="">
+                                                     <img src="{% static '/img/visit/visit_4.jpg' %}" alt="">
                                                 </div>
                                             <div class="founder-text">
-                                                <span>Oliva jems</span>
+                                                <a href="#"><span>AI Library</span></a>
                                                 <p>UIX designer</p>
                                             </div>
                                             </div>
@@ -461,15 +489,15 @@
                                     <div class="single-testimonial text-center">
                                         <div class="testimonial-caption ">
                                             <div class="testimonial-top-cap">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
+                                                <p>AI Network</p>
                                             </div>
                                             <!-- founder -->
                                             <div class="testimonial-founder d-flex align-items-center justify-content-center">
                                                 <div class="founder-img">
-                                                    <img src="{% static '/img/testmonial/testimonial.png' %}" alt="">
+                                                    <img src="{% static '/img/visit/visit_2.jpg' %}" alt="">
                                                 </div>
                                             <div class="founder-text">
-                                                <span>Oliva jems</span>
+                                                <a href="#"><span>AI Network</span></a>
                                                 <p>UIX designer</p>
                                             </div>
                                             </div>
@@ -483,30 +511,30 @@
         </div>
         <!-- Testimonial End -->
         <!-- Tips Triks Start -->
-        <div class="tips-triks-area tips-padding">
+        <div id="team" class="tips-triks-area tips-padding">
             <div class="container">
                  <!-- Section-tittle -->
                  <div class="row d-flex justify-content-center">
                     <div class="col-lg-6 col-md-8 pr-0">
                         <div class="section-tittle text-center">
-                            <h2>Tips and Tricks From Our Exparts</h2>
+                            <h2>Our team</h2>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="col-xl-3 col-lg-3 col-md-6">
                         <div class="single-tips mb-50">
                             <div class="tips-img">
-                                <img src="{% static '/img/tips/tips_1.jpg' %}" alt="">
+                                <img src="{% static '/img/tips/mrkais.jpg' %}" alt="">
                             </div>
                             <div class="tips-caption">
-                                <h4><a href="#">Twice profit than before you ever got</a></h4>
-                                <span>Continue Reading</span>
+                                <h4><a href="#">Kais Mejri</a></h4>
+                                <span>Secretary general</span>
                                 <p>March 3, 2020</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="col-xl-3 col-lg-3 col-md-6">
                         <div class="single-tips mb-50">
                             <div class="tips-img">
                                 <img src="{% static '/img/tips/tips_2.jpg' %}" alt="">
@@ -518,7 +546,7 @@
                             </div>
                         </div>
                     </div>
-                     <div class="col-xl-4 col-lg-4 col-md-6">
+                     <div class="col-xl-3 col-lg-3 col-md-6">
                         <div class="single-tips mb-50">
                             <div class="tips-img">
                                 <img src="{% static '/img/tips/tips_3.jpg' %}" alt="">
@@ -535,25 +563,32 @@
         </div>
         <!-- Tips Triks End -->
          <!-- have-project Start-->
-         <div class="have-project">
+         <div id="newsletter" class="have-project">
+         <form enctype="multipart/form-data" method="post" action="/newsletter/example-dsnaa-newsletter/subscribe/">
             <div class="container">
                 <div class="haveAproject"  data-background="/img/team/have.jpg">
                     <div class="row d-flex align-items-center">
                         <div class="col-xl-7 col-lg-9 col-md-12">
+                        
                             <div class="wantToWork-caption">
-                                <h2>Have project in mind?</h2>
+                            
+                            {% csrf_token %}
+                                <h2>Subscribe to our newsletter</h2>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut.</p>
+                            <input type="email" class="form-control"  placeholder="Your Email" form name="email_field" required="" id="id_email_field">
+                 
                             </div>
                         </div>
                         <div class="col-xl-5 col-lg-3 col-md-12">
                            <div class="wantToWork-btn f-right">
-                                <a href="#" class="btn btn-ans">Contact Us</a>
+                                <button id="id_submit" name="submit" value="Subscribe" class="btn hero-btn" type="submit">Subscribe</button>
                            </div>
                         </div>
                     </div>
                 </div>
                 
             </div>
+            </form>
         </div>
         <!-- have-project End -->
 
@@ -561,7 +596,7 @@
    <footer>
 
        <!-- Footer Start-->
-      <div class="footer-main" data-background="/img/shape/footer_bg.png">
+      <div class="footer-main" data-background="{% static '/img/shape/footer_bg.png' %}">
         <div class="footer-area footer-padding">
             <div class="container">
                 <div class="row d-flex justify-content-between">
@@ -570,7 +605,7 @@
                          <div class="single-footer-caption mb-30">
                               <!-- logo -->
                              <div class="footer-logo">
-                                 <a href="index.html"><img src="{% static '/img/logo/logo2_footer.png'%}" alt=""></a>
+                                 <a href="index.html"><img src="{% static '/img/logo/logo.png'%}" alt=""></a>
                              </div>
                              <div class="footer-tittle">
                                  <div class="footer-pera">
@@ -640,7 +675,7 @@
                          <div class="col-xl-12 ">
                              <div class="footer-copy-right text-center">
                                  <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | DSNAA </i></a>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                              </div>
                          </div>
