@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .models import Blog,Task
+from .models import Blog, Category,Task
 from .forms import adminForm
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -52,6 +52,7 @@ def users(request) :
 def blog(request) : 
     blogs = Blog.objects.all()
     return render(request, "Admin/examples/blogs.html",{'blogs':blogs})
+
 
 
 class taskList(LoginRequiredMixin,ListView) :

@@ -17988,12 +17988,12 @@ a.text-darker:focus
     }
     .table
     {
+        width: 50rem;
         border-collapse: collapse !important;
     }
     .table td,
     .table th
     {
-         
         background-color: #fff !important;
     }
     .table-bordered th,
