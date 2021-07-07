@@ -48,12 +48,22 @@
                 <span class="nav-link-text">Users</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'blog' %}">
-                <i class="ni ni-pin-3 text-primary"></i>
-                <span class="nav-link-text">Blogs & Podcasts</span>
+            
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="{% static '/Admin/examples/login.html'%}" data-toggle="dropdown">
+                <i class="ni ni-key-25 text-info"></i>
+                <span class="nav-link-text">Library</span>
+                
               </a>
+               <div class="dropdown-menu">
+                 <a class="dropdown-item" href="{% url 'blogDashboard' %}">Create Documents</a>
+                 <a class="dropdown-item" href="#">View Documents</a>
+                 <a class="dropdown-item" href="#">View Library</a>
+               </div>
             </li>
+
+
             <li class="nav-item">
               <a class="nav-link" href="{% url 'tasks' %}">
                 <i class="ni ni-single-02 text-yellow"></i>
@@ -79,10 +89,12 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% static '/Admin/examples/login.html'%}">
+              <a class="nav-link" href="{% static '/Admin/examples/login.html'%}" data-toggle="collapse">
                 <i class="ni ni-key-25 text-info"></i>
                 <span class="nav-link-text">Library</span>
+                
               </a>
+         
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% static '/Admin/examples/login.html'%}">

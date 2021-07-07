@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,7 +145,7 @@
               </div>
               <form action="" method="POST">
                 {% csrf_token %}
-                {{form}} 
+                {{form |crispy}} 
                 <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
                 <div class="row my-4">
                   <div class="col-12">

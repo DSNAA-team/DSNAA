@@ -118,8 +118,14 @@ class Task(models.Model) :
         ordering = ['complete']
     
  
+# Create your models here.
 
 
+class ContactForm(models.Model):
+     message=models.TextField()
+     name=models.CharField(max_length=50)
+     email=models.EmailField(max_length=50)
+     subject=models.CharField(max_length=100)
 
 
 
@@ -138,6 +144,7 @@ class Task(models.Model) :
 
 
     
+
 
 
 

@@ -38,8 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'dsnaaapp.apps.DsnaaappConfig'
+    'dsnaaapp.apps.DsnaaappConfig',
+    'django.contrib.sites',
+    'sorl.thumbnail',
+    'crispy_forms',
+    'newsletter'
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -73,7 +78,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dsnaaproject.wsgi.application'
 
+# Using sorl-thumbnail
+NEWSLETTER_THUMBNAIL = 'sorl-thumbnail'
 
+# Using easy-thumbnails
+NEWSLETTER_THUMBNAIL = 'easy-thumbnails'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -88,6 +97,14 @@ DATABASES = {
     }
 }
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# Host for sending e-mail.
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'hamzalazhar34@gmail.com'
+EMAIL_HOST_PASSWORD = 'qwertyhamzus'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -129,7 +146,7 @@ USE_L10N = True
 USE_TZ = True
 
 LOCALE_PATHS = (
-    os.path.join(BASE_DIR, 'locale'),
+    os.path.join(BASE_DIR, 'locale/'),
 )
 
 # Static files (CSS, JavaScript, Images)
@@ -142,5 +159,12 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+SITE_ID = 1
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'image')
+LOGIN_URL = 'signin'
+MEDIA_URL = '/image/'
 LOGIN_URL = 'signin'
