@@ -23,7 +23,8 @@ path('blog', views.blog,name='blog'),
 path('signup',views.signup,name='signup'),
 path("login", views.login_request, name="login"),
 path("logout", views.logout_request, name="logout"),
-path("events", views.events, name="events")
+path("events", views.events, name="events"),
+path("library", views.library, name="library")
 
 
 ]
