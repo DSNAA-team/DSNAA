@@ -111,17 +111,5 @@ class Migration(migrations.Migration):
                 ('library', models.ManyToManyField(to='dsnaaapp.Library')),
             ],
         ),
-        migrations.CreateModel(
-            name='Blog',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('titre', models.CharField(max_length=255, null=True)),
-                ('slug', models.SlugField(null=True)),
-                ('content', models.TextField(max_length=2500, null=True)),
-                ('date_creation', models.DateTimeField(auto_now_add=True, null=True)),
-                ('image', models.ImageField(null=True, upload_to='')),
-                ('autheur', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='dsnaaapp.category')),
-            ],
-        ),
+        
     ]
