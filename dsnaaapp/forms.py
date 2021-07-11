@@ -1,4 +1,4 @@
-from dsnaaapp.models import ContactForm
+from dsnaaapp.models import ContactForm, Event
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms.models import ModelForm
@@ -29,7 +29,18 @@ class ContactF(ModelForm):
 		model = ContactForm
 		fields = '__all__'
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+     
 
+class EventForm(ModelForm):
+	class Meta:
+		model = Event
+		fields = '__all__'
+		widgets = {
+            'date_event': DateInput()
+		
+        }
 
 Roles = (
     ("1", "Admin"),

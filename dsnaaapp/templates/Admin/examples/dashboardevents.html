@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html>
 
@@ -328,8 +329,8 @@
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
           <div class="col-lg-7 col-md-10">  
-            <h1 class="display-2 text-white">Blog</h1>
-            <a href="#!" class="btn btn-neutral">Creer une blog</a>
+            <h1 class="display-2 text-white">Events</h1>
+            <a href="#!" class="btn btn-neutral">Add Event</a>
           </div>
         </div>
       </div>
@@ -342,7 +343,7 @@
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Ajouter une blog </h3>
+                  <h3 class="mb-0">Add Event  </h3>
                 </div>
                 <div class="col-4 text-right">
                   <a href="#!" class="btn btn-sm btn-primary">Settings</a>
@@ -350,63 +351,26 @@
               </div>
             </div>
             <div class="card-body">
-              <form>
-                <h6 class="heading-small text-muted mb-4">Insérez les informations necessaires</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-username">Autheur</label>
-                        <input type="text" id="input-username" class="form-control" placeholder="Autheur" value="">
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label">Titre</label>
-                        <input type="text"  class="form-control" placeholder="Titre">
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label">Slug</label>
-                        <input type="text"  class="form-control" placeholder="Slug">
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label">Intro</label>
-                        <textarea rows = "5" cols = "60" name = "Contenu" placeholder="Intro" class="form-control"></textarea> 
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">Body</label>
-                         
-                      <textarea rows = "5" cols = "60" name = "Contenu" placeholder="Body" class="form-control"></textarea> 
-                      </div>
-                    </div>
-                    </div>
-                    <button type="submit" class="btn btn-success">Submit blog</button>
-                  </div>
-                </div>
+              <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{form|crispy}}
+              <button type="submit" class="btn btn-success">Submit Event</button>
               </form>
               <br>
               <br>
               <div class="table-responsive">
-                {% for blogs in blogs %}
+                {% for event in events %}
                 <table class="table align-items-center table-flush">
                   <thead class="thead-light">
                     <tr>
-                      <th scope="col" class="sort" data-sort="name">Autheur</th>
-                      <th scope="col" class="sort" data-sort="budget">Titre</th>
-                      <th scope="col" class="sort" data-sort="status">Slug</th>
-                      <th scope="col" class="sort" data-sort="status">content</th>
-                      <th scope="col" class="sort" data-sort="status">image</th>
+                      <th scope="col" class="sort" data-sort="name">Title</th>
+                      <th scope="col" class="sort" data-sort="budget">Description</th>
                       <th scope="col" class="sort" data-sort="status">Date</th>
-                      <th scope="col" class="sort" data-sort="status">Number</th>
-                      <th scope="col" class="sort" data-sort="status">Category</th>
+                      <th scope="col" class="sort" data-sort="status">Organizer</th>
+                      <th scope="col" class="sort" data-sort="status">Type</th>
+                      <th scope="col" class="sort" data-sort="status">Place</th>
+                      <th scope="col" class="sort" data-sort="status">Image</th>
+                  
                       <th scope="col"></th>
                     </tr>
                   </thead>
@@ -415,42 +379,47 @@
                       <th scope="row">
                         <div class="media align-items-center">
                           <div class="media-body">
-                            <span class="name mb-0 text-sm">{{blogs.autheur}}</span>
+                            <span class="name mb-0 text-sm">{{event.title}}</span>
                           </div>
                         </div>
                       </th>
                       <td >
-                        {{blogs.titre}}
+                        {{event.description}}
                       </td>
                       <td>
                         <span>
                           <i></i>
-                          <span>{{blogs.slug}}</span>
+                          <span>{{event.date_event}}</span>
                         </span>
                       </td>
                       <td>
                         <div class="avatar-group">
-                          {{blogs.content}}
+                         {{event.organizer}}
                         </div>
                       </td>
                       <td>
                         <div class="d-flex align-items-center">
-                          <span class="completion mr-2">{{blogs.date}}</span>
+                          <span class="completion mr-2"> {{event.type}}</span>
                         </div>
                       </td>
                       <td>
                         <div class="d-flex align-items-center">
-                          <span class="completion mr-2"><img src="/{{BASE_DIR}}/{{blogs.image}}"></span>
+                          <span class="completion mr-2">{{event.place}}</span>
                         </div>
                       </td>
                       <td>
                         <div class="d-flex align-items-center">
-                          <span class="completion mr-2">{{blogs.id}}</span>
+                          <span class="completion mr-2"><img height="50px" width="50px" src="{{ event.image.url }}"></span>
                         </div>
                       </td>
                       <td>
                         <div class="d-flex align-items-center">
-                          <span class="completion mr-2">{{blogs.category.theme}}</span>
+                          <span class="completion mr-2"><a class="btn btn-success" href="{% url 'dashboardeventsupdate' event.id %}">edit</a></span>
+                        </div>
+                      </td>
+                       <td>
+                        <div class="d-flex align-items-center">
+                          <span class="completion mr-2"><a class="btn btn-danger" href="{% url 'dashboardeventsdelete' event.id %}">delete</a></span>
                         </div>
                       </td>
                       <td class="text-right">

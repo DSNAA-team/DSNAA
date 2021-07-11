@@ -24,7 +24,11 @@ path('signup',views.signup,name='signup'),
 path("login", views.login_request, name="login"),
 path("logout", views.logout_request, name="logout"),
 path("events", views.events, name="events"),
-path("library", views.library, name="library")
+path("dashboard/events", views.eventsDashboard, name="dashboardevents"),
+path("dashboard/update/<int:eId>", views.UpdateEvent, name="dashboardeventsupdate"),
+path("dashboard/delete/<int:pk>", views.DeleteEvent, name="dashboardeventsdelete"),
+path("library", views.library, name="library"),
+path('media', views.media, name="media")
 
 
-]
+]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

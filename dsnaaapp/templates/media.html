@@ -3,7 +3,11 @@
 
 {% include "base.html" %}
 
- <link rel="stylesheet" href="{% static 'registration/css/Latest-Events.css' %}">
+
+<link rel="stylesheet" href="{% static 'mediapage/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+   
    <body>
        
     <!-- Preloader Start -->
@@ -17,15 +21,8 @@
             </div>
         </div>
     </div>
-    <!-- Preloader Start -->
 
-
-
-<body>
-
-     <!-- Slider Area Start-->
-    
-        <div class="container">
+       <div class="container">
             <!-- Section-tittle -->
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-8">
@@ -35,56 +32,37 @@
                 </div>
             </div>
         </div>
-    
 
-
-    <section><div class="blog-home2 py-5">
+   <section><div class="blog-home2 py-5">
   <div class="container">
     <!-- Row  -->
     <div class="row justify-content-center">
       <!-- Column -->
       <div class="col-md-8 text-center">
-        <h3 class="my-3">Upcoming Events</h3>
+        <h3 class="my-3">Media Categories</h3>
         <h6 class="subtitle font-weight-normal">You can relay on our amazing features list and also our customer services will be great experience for you without doubt</h6>
       </div>
       <!-- Column -->
       <!-- Column -->
     </div>
-    <div class="row mt-4">
-      <!-- Column -->
-      <div class="col-md-4 on-hover">
-        <div class="card border-0 mb-4">
-          <a href="#"><img class="card-img-top" src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/blog/blog-home/img3.jpg" alt="wrappixel kit"></a>
-          <div class="date-pos bg-info-gradiant p-2 d-inline-block text-center rounded text-white position-absolute">Oct<span class="d-block">23</span></div>
-          <h5 class="font-weight-medium mt-3"><a href="#" class="text-decoration-none link">You should have eagle’s eye on new trends and techonogies</a></h5>
-          <p class="mt-3">Business Park, Opp. Corns Sam Restaurant, New Yoark, US</p>
-          <a href="#" class="text-decoration-none linking text-themecolor mt-2">Learn More</a>
-        </div>
-      </div>
-      <!-- Column -->
-      <div class="col-md-4 on-hover">
-        <div class="card border-0 mb-4">
-          <a href="#"><img class="card-img-top" src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/blog/blog-home/img2.jpg" alt="wrappixel kit"></a>
-          <div class="date-pos bg-info-gradiant p-2 d-inline-block text-center rounded text-white position-absolute">Oct<span class="d-block">23</span></div>
-          <h5 class="font-weight-medium mt-3"><a href="#" class="text-decoration-none link">New Seminar on Newest Food Recipe from World’s Best</a></h5>
-          <p class="mt-3">Business Park, Opp. Corns Sam Restaurant, New Yoark, US</p>
-          <a href="#" class="text-decoration-none linking text-themecolor mt-2">Learn More</a>
-        </div>
-      </div>
-      <!-- Column -->
-      <div class="col-md-4 on-hover">
-        <div class="card border-0 mb-4">
-          <a href="#"><img class="card-img-top" src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/blog/blog-home/img1.jpg" alt="wrappixel kit"></a>
-          <div class="date-pos bg-info-gradiant p-2 d-inline-block text-center rounded text-white position-absolute">Oct<span class="d-block">23</span></div>
-          <h5 class="font-weight-medium mt-3"><a href="#" class="text-decoration-none link">Learn from small things to create something bigger.</a></h5>
-          <p class="mt-3">Business Park, Opp. Corns Sam Restaurant, New Yoark, US</p>
-          <a href="#" class="text-decoration-none linking text-themecolor mt-2">Learn More</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
+   
+     <main class="page projets-page">
+        <section class="portfolio-block projects compact-grid">
+            
+            <div class="row no-gutters">
+                <div class="col-md-6 col-lg-4 item zoom-on-hover"><a href="#"><img class="img-fluid image" src="{% static 'registration/img/nature/image1.jpg' %}"><span class="description"><span class="description-heading">Lorem Ipsum</span><span class="description-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></span></a></div>
+                <div class="col-md-6 col-lg-4 item zoom-on-hover"><a href="#"><img class="img-fluid image" src="{% static 'registration/img/nature/image2.jpg' %}"><span class="description"><span class="description-heading">Lorem Ipsum</span><span class="description-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></span></a></div>
+                <div class="col-md-6 col-lg-4 item zoom-on-hover"><a href="#"><img class="img-fluid image" src="{% static 'registration/img/nature/image3.jpg' %}"><span class="description"><span class="description-heading">Lorem Ipsum</span><span class="description-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></span></a></div>
+                <div class="col-md-6 col-lg-4 item zoom-on-hover"><a href="#"><img class="img-fluid image" src="{% static 'registration/img/nature/image4.jpg' %}"><span class="description"><span class="description-heading">Lorem Ipsum</span><span class="description-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></span></a></div>
+                <div class="col-md-6 col-lg-4 item zoom-on-hover"><a href="#"><img class="img-fluid image" src="{% static 'registration/img/nature/image5.jpg' %}"><span class="description"><span class="description-heading">Lorem Ipsum</span><span class="description-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></span></a></div>
+                <div class="col-md-6 col-lg-4 item zoom-on-hover"><a href="#"><img class="img-fluid image" src="{% static 'registration/img/nature/image6.jpg' %}"><span class="description"><span class="description-heading">Lorem Ipsum</span><span class="description-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></span></a></div>
+                <div class="col-md-6 col-lg-4 item zoom-on-hover"><a href="#"><img class="img-fluid image" src="{% static 'registration/img/nature/image7.jpg' %}"><span class="description"><span class="description-heading">Lorem Ipsum</span><span class="description-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></span></a></div>
+                <div class="col-md-6 col-lg-4 item zoom-on-hover"><a href="#"><img class="img-fluid image" src="{% static 'registration/img/nature/image8.jpg' %}"><span class="description"><span class="description-heading">Lorem Ipsum</span><span class="description-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></span></a></div>
+                <div class="col-md-6 col-lg-4 item zoom-on-hover"><a href="#"><img class="img-fluid image" src="{% static 'registration/img/nature/image9.jpg' %}"><span class="description"><span class="description-heading">Lorem Ipsum</span><span class="description-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></span></a></div>
+            </div>
+        </section>
+    </main>
+ 
 
 
 
@@ -94,8 +72,9 @@
 
 
 
+  <footer>
 
-    <!-- Footer Start-->
+       <!-- Footer Start-->
       <div class="footer-main" data-background="{% static '/img/shape/footer_bg.png' %}">
         <div class="footer-area footer-padding">
             <div class="container">
@@ -196,8 +175,6 @@
 		<script src="{% static '/js/vendor/jquery-1.12.4.min.js' %}"></script>
         <script src="{% static '/js/popper.min.js' %}"></script>
         <script src="{% static '/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'registration/js/jquery.min.js' %}"></script>
-    <script src="{% static 'registration/bootstrap/js/bootstrap.min.js' %}"></script>
 	    <!-- Jquery Mobile Menu -->
         <script src="{% static '/js/jquery.slicknav.min.js' %}"></script>
 
@@ -226,6 +203,12 @@
 		<!-- Jquery Plugins, main Jquery -->	
         <script src="{% static '/js/plugins.js' %}"></script>
         <script src="{% static '/js/main.js' %}"></script>
-        
-    </body>
+
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+    <script src="{% static 'registration/js/theme.js' %}"></script>
+    <script src="{% static 'mediapage/js/jquery.min.js' %}"></script>
+
+
+</body>
 </html>

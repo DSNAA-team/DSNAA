@@ -116,11 +116,22 @@ class Task(models.Model) :
     
     class Meta : 
         ordering = ['complete']
-    
- 
-# Create your models here.
 
 
+'''Class evenement'''
+class Event(models.Model) : 
+    title = models.CharField(max_length=255)
+    description = models.TextField(max_length=500)
+    date_event = models.DateField()
+    organizer = models.CharField(max_length=50)
+    type = models.CharField(max_length=50)
+    place = models.CharField(null=True,max_length=50)
+    image = models.ImageField(null=True,upload_to = "images/")
+    def __str__(self) :
+        return self.title
+
+
+'''Class fomrulaire contact'''
 class ContactForm(models.Model):
      message=models.TextField()
      name=models.CharField(max_length=50)

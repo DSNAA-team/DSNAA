@@ -62,7 +62,7 @@
                                             <li><a href="elements.html">AI Media</a></li>
                                         </ul>
                                     </li>
-                                    <li><a htef="/contact"  >Media</a></li>
+                                    <li><a href="{% url 'media' %}"  >Media</a></li>
                                     <li><a href="{% url 'events' %}"  >Agenda</a></li>
                                     <li><a href="/blog">Blog</a>
                                         <ul class="submenu">
@@ -91,7 +91,7 @@
                             <div class="header-right-btn f-right d-none d-lg-block">
                             {% if user.is_authenticated %}
                         
-                                Welcome {{ user.username }} 
+                                <h6><small><i class="bi bi-file-person-fill"></i>{{ user.username }}</small> </h6>
                                 <a href="{% url 'logout' %}" class="btn header-btn">Log out</a>
                                 {% else %}
                                 <div class="col-xl-0 col-lg-1 col-md-1">
