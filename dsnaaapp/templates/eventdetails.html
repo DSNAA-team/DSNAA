@@ -3,10 +3,14 @@
 
 {% include "base.html" %}
 
- <link rel="stylesheet" href="{% static 'registration/css/Latest-Events.css' %}">
-   <body>
-       
-    <!-- Preloader Start -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+  <link rel="stylesheet" href="{% static 'registration/css/Article-Clean.css' %}">
+  
+
+
+<body>
+     <!-- Preloader Start -->
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
@@ -18,10 +22,6 @@
         </div>
     </div>
     <!-- Preloader Start -->
-
-
-
-
 
      <!-- Slider Area Start-->
     
@@ -35,56 +35,29 @@
                 </div>
             </div>
         </div>
+
+    <section class="article-clean">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+                    <div class="intro">
+                        <h1 class="text-center">{{e.title}}</h1>
+                        <p class="text-center"><span class="by">organized by</span> <a href="#">{{e.organizer}}</a><span class="date">{{e.date_event}}</span><span class="date">{{e.place}}</span></p><img class="img-fluid" src="{{e.image.url}}">
+                    </div>
+                    <div class="text">
+                        <p>{{e.description}}</p>
+                        <p>
+                        <br>
+                        <hr>
+                        
+                      
     
-
-
-    <section><div class="blog-home2 py-5">
-  <div class="container">
-    <!-- Row  -->
-    <div class="row justify-content-center">
-      <!-- Column -->
-      <div class="col-md-8 text-center">
-        <h3 class="my-3">Upcoming Events</h3>
-        <h6 class="subtitle font-weight-normal">You can relay on our amazing features list and also our customer services will be great experience for you without doubt</h6>
-      </div>
-      <!-- Column -->
-      <!-- Column -->
-    </div>
-    <div class="row mt-4">
-     
-      <!-- Column -->
-       {% for event in events %}
-      <div class="col-md-4 on-hover">
-     
-        <div class="card border-0 mb-4">
-          <a href="#"><img width="150px" height="220px" class="card-img-top" src="{{ event.image.url }}" alt="wrappixel kit"></a>
-          <div class="date-pos bg-info-gradiant p-2 d-inline-block text-center rounded text-white position-absolute">{{ event.date_event }}<span class="d-block"></span></div>
-          <h5 class="font-weight-medium mt-3"><a href="{% url 'eventdetails' event.id %}" class="text-decoration-none link">{{event.title}}</a></h5>
-          <p class="mt-3">{{event.description}}</p>
-          <p class="mt-5"> <strong>{{event.place}}</strong></p>
-          <p class="mt-0">Organizer : <strong>{{event.organizer}}</strong></p>
-          <p href="#" class="text-decoration-none linking text-themecolor mt-2">Learn More</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      {% endfor %}
-      <!-- Column -->
-      
-      
-    </div>
-  </div>
-</div>
-</section>
-
-
-
-
-
-
-
-
-
-
-    <!-- Footer Start-->
+    </section>
+     <!-- Footer Start-->
       <div class="footer-main" data-background="{% static '/img/shape/footer_bg.png' %}">
         <div class="footer-area footer-padding">
             <div class="container">
@@ -215,6 +188,9 @@
 		<!-- Jquery Plugins, main Jquery -->	
         <script src="{% static '/js/plugins.js' %}"></script>
         <script src="{% static '/js/main.js' %}"></script>
-        
-    </body>
-</html>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>

@@ -53,9 +53,9 @@ def blog(request):
     return render(request, "blog.html")
 
 def events(request):
-    
+    events = Event.objects.all()
    
-    return render(request, "events.html" )
+    return render(request, "events.html", {'events': events} )
 
 
 '''event crud start'''
@@ -77,7 +77,7 @@ def UpdateEvent(request, eId):
         return render(request, 'Admin/examples/eventupdate.html', {'form': form, 'e_id': eId})
 
     if request.method == 'POST':
-        form = EventForm(request.POST, instance=event)
+        form = EventForm(request.POST,request.FILES, instance=event)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('dashboardevents'))
@@ -92,9 +92,13 @@ def DeleteEvent(request,pk=None):
     Events.delete()
     return HttpResponseRedirect(reverse('dashboardevents'))
 
+def Eventdetails(request,id):
+    #projet=Projet.objects.get(pk=id)
+    event=get_object_or_404(Event,pk=id)#select where id
+    context={'e':event}
+    return render(request,'eventdetails.html',context)    
+
 '''event crud end'''
-
-
 
 
 def signup(request):
