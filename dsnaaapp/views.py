@@ -12,8 +12,8 @@ from typing import List
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .models import Blog, Event, Task
-from .forms import EventForm, adminForm
+from .models import Album, Blog, Event, Image, MediaCategory, Task
+from .forms import AlbumForm, EventForm, ImageForm, MediacatForm, adminForm
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -74,7 +74,7 @@ def UpdateEvent(request, eId):
     event = get_object_or_404(Event, pk=eId)
     if request.method == 'GET':
         form = EventForm(instance=event)
-        return render(request, 'Admin/examples/eventupdate.html', {'form': form, 'e_id': eId})
+        return render(request, 'Admin/examples/updateform.html', {'form': form, 'e_id': eId})
 
     if request.method == 'POST':
         form = EventForm(request.POST,request.FILES, instance=event)
@@ -100,6 +100,125 @@ def Eventdetails(request,id):
 
 '''event crud end'''
 
+'''mediacategory crud start'''
+def Mediadcatdashboard(request):
+    mediacat = MediaCategory.objects.all()
+    if request.method == "POST":
+        form = MediacatForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+    else:
+        form = MediacatForm()
+    return render(request, "Admin/examples/dashboardmediacategory.html", {'form': form, 'mediacat': mediacat})
+
+
+def UpdateMediadcategory(request, Id):
+    mediacat = get_object_or_404(MediaCategory, pk=Id)
+    if request.method == 'GET':
+        form = MediacatForm(instance=mediacat)
+        return render(request, 'Admin/examples/updateform.html', {'form': form, 'mc_id': Id})
+
+    if request.method == 'POST':
+        form = MediacatForm(request.POST,request.FILES, instance=mediacat)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('dashboardmediacat'))
+        else:
+            return render(request, 'Admin/examples/dashboardmediacategory.html',
+                          {'form': form,
+                           'msg_erreur': "Erreur d'ajout"}
+                          )
+
+def DeleteMediaCategory(request,pk=None):
+    mc = MediaCategory.objects.get(id=pk)
+    mc.delete()
+    return HttpResponseRedirect(reverse('dashboardmediacat'))
+
+
+
+'''mediacategory crud end'''
+
+
+
+'''album crud start'''
+
+'''add & display'''
+def Albumdashboard(request):
+    albums = Album.objects.all()
+    if request.method == "POST":
+        form = AlbumForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+    else:
+        form = AlbumForm()
+    return render(request, "Admin/examples/dashboardalbum.html", {'form': form, 'albums': albums})
+
+
+
+
+def UpdateAlbum(request, Id):
+    album = get_object_or_404(Album, pk=Id)
+    if request.method == 'GET':
+        form = AlbumForm(instance=album)
+        return render(request, 'Admin/examples/updateform.html', {'form': form, 'al_id': Id})
+
+    if request.method == 'POST':
+        form = AlbumForm(request.POST,request.FILES, instance=album)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('dashboardalbum'))
+        else:
+            return render(request, 'Admin/examples/dashboardalbum.html',
+                          {'form': form,
+                           'msg_erreur': "Erreur d'ajout"}
+                          )
+
+def DeleteAlbum(request,pk=None):
+    mc = Album.objects.get(id=pk)
+    mc.delete()
+    return HttpResponseRedirect(reverse('dashboardalbum'))
+
+
+'''album crud end'''
+
+'''add & display'''
+def Imagedashboard(request):
+    images = Image.objects.all()
+    if request.method == "POST":
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+    else:
+        form = ImageForm()
+    return render(request, "Admin/examples/dashboardimage.html", {'form': form, 'images': images})
+
+
+def UpdateImage(request, Id):
+    image = get_object_or_404(Image, pk=Id)
+    if request.method == 'GET':
+        form = ImageForm(instance=image)
+        return render(request, 'Admin/examples/updateform.html', {'form': form, 'img_id': Id})
+
+    if request.method == 'POST':
+        form = ImageForm(request.POST,request.FILES, instance=image)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('dashboardimage'))
+        else:
+            return render(request, 'Admin/examples/dashboardimage.html',
+                          {'form': form,
+                           'msg_erreur': "Erreur d'ajout"}
+                          )
+
+def DeleteAlbum(request,pk=None):
+    img = Image.objects.get(id=pk)
+    img.delete()
+    return HttpResponseRedirect(reverse('dashboardimage'))
+
+
+'''image crud start'''
+
+'''image crud end'''
 
 def signup(request):
     if request.method == 'POST':

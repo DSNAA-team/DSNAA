@@ -1,4 +1,4 @@
-from dsnaaapp.models import ContactForm, Event
+from dsnaaapp.models import Album, ContactForm, Event, Image, MediaCategory
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms.models import ModelForm
@@ -41,6 +41,31 @@ class EventForm(ModelForm):
             'date_event': DateInput()
 		
         }
+
+
+class MediacatForm(ModelForm):
+	class Meta:
+		model = MediaCategory
+		fields = '__all__'
+		
+
+class AlbumForm(ModelForm):
+	class Meta:
+		model = Album
+		fields = '__all__'	
+		widgets = {
+            'date_creation': DateInput()
+		
+        }
+
+class ImageForm(ModelForm):
+	class Meta:
+		model = Image
+		fields = '__all__'	
+		widgets = {
+            'date_publication': DateInput()
+		
+        }	
 
 Roles = (
     ("1", "Admin"),

@@ -18,7 +18,6 @@
   <link rel="stylesheet" href="{% static '/Admin/vendor/@fortawesome/fontawesome-free/css/all.min.css'%}" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{% static '/Admin/css/argon.css'%}" type="text/css">
-  <link rel="stylesheet" href="{% static '/css/dsnaa.css' %}">
 </head>
 
 <body>
@@ -330,8 +329,8 @@
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
           <div class="col-lg-7 col-md-10">  
-            <h1 class="display-2 text-white">Events</h1>
-            <a href="#!" class="btn btn-neutral">Add Event</a>
+            <h1 class="display-2 text-white">Editing page</h1>
+            <a href="#!" class="btn btn-neutral">Update </a>
           </div>
         </div>
       </div>
@@ -344,7 +343,7 @@
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Add Event  </h3>
+                  <h3 class="mb-0"> Update  </h3>
                 </div>
                 <div class="col-4 text-right">
                   <a href="#!" class="btn btn-sm btn-primary">Settings</a>
@@ -354,20 +353,13 @@
             <div class="card-body">
               <form method="POST" enctype="multipart/form-data">
               {% csrf_token %}
-              {{form|crispy}}
-              <button type="submit" class="btn btn-success">Submit Event</button>
+              {{form|crispy }}
+              <button type="submit" class="btn btn-success">Update </button>
               </form>
-               </div>
-            </div> 
-            </div>
               <br>
               <br>
-              <div class="col-xl-12 order-xl-1">
-              <div class="card">
-              <div class="card-body">
               <div class="table-responsive">
-              
-               
+                {% for event in events %}
                 <table class="table align-items-center table-flush">
                   <thead class="thead-light">
                     <tr>
@@ -378,12 +370,10 @@
                       <th scope="col" class="sort" data-sort="status">Type</th>
                       <th scope="col" class="sort" data-sort="status">Place</th>
                       <th scope="col" class="sort" data-sort="status">Image</th>
-                      <th scope="col" class="sort" data-sort="status">Actions</th>
-                      <th scope="col" class="sort" data-sort="status">Actions</th>
-                     
+                  
+                      <th scope="col"></th>
                     </tr>
                   </thead>
-                   {% for event in events %}
                   <tbody class="list">
                     <tr>
                       <th scope="row">
@@ -393,7 +383,7 @@
                           </div>
                         </div>
                       </th>
-                      <td style="white-space:pre-wrap; word-wrap:break-word" >
+                      <td >
                         {{event.description}}
                       </td>
                       <td>
@@ -424,12 +414,7 @@
                       </td>
                       <td>
                         <div class="d-flex align-items-center">
-                          <span class="completion mr-2"><a class="btn btn-success" href="{% url 'dashboardeventsupdate' event.id %}">edit</a></span>
-                        </div>
-                      </td>
-                       <td>
-                        <div class="d-flex align-items-center">
-                          <span class="completion mr-2"><a class="btn btn-danger" href="{% url 'dashboardeventsdelete' event.id %}">delete</a></span>
+                          <span class="completion mr-2"></span>
                         </div>
                       </td>
                       <td class="text-right">
@@ -446,14 +431,10 @@
                       </td>
                     </tr>
                   </tbody>
-                  {% endfor %}
-                </table>        
+                </table>
+                {% endfor %}
+              </div>
                 
-                 </div>
-                </div>
-                </div>
-                </div>
-             
       <!-- Footer -->
       <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">

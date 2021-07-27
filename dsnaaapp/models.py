@@ -57,12 +57,25 @@ class Documents(models.Model) :
 
 
 '''Class Galery '''
-
-class Gallery(models.Model) : 
-    date_creation = models.DateTimeField(auto_now_add=True)
-    titre = models.TextField(max_length=255)
+class MediaCategory(models.Model) : 
+    title = models.TextField(max_length=255)
+    description = models.TextField(max_length=255)
+    thumbnail = models.ImageField(null=True)
     def __str__(self) :
-        return self.titre
+        return self.title
+
+        
+class Album(models.Model) : 
+    
+    title = models.TextField(max_length=255)
+    description = models.TextField(max_length=255)
+    date_creation = models.DateTimeField(auto_now_add=True)
+    thumbnail = models.ImageField(null=True)
+    Category = models.ForeignKey(MediaCategory, on_delete=models.CASCADE)
+    def __str__(self) :
+        return self.title
+
+
 
 
 
@@ -74,7 +87,7 @@ class Image(models.Model) :
     date_publication = models.DateTimeField(auto_now_add=True)
     lieu = models.TextField(max_length=40)
     image = models.ImageField()
-    gallery = models.ManyToManyField(Gallery)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE,null=True)
     def __str__(self) :
         return self.titre
 

@@ -331,7 +331,7 @@
         <div class="row">
           <div class="col-lg-7 col-md-10">  
             <h1 class="display-2 text-white">Events</h1>
-            <a href="#!" class="btn btn-neutral">Add Event</a>
+            <a href="#!" class="btn btn-neutral">Add Album</a>
           </div>
         </div>
       </div>
@@ -344,7 +344,7 @@
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Add Event  </h3>
+                  <h3 class="mb-0">Add a Media Category  </h3>
                 </div>
                 <div class="col-4 text-right">
                   <a href="#!" class="btn btn-sm btn-primary">Settings</a>
@@ -355,7 +355,7 @@
               <form method="POST" enctype="multipart/form-data">
               {% csrf_token %}
               {{form|crispy}}
-              <button type="submit" class="btn btn-success">Submit Event</button>
+              <button type="submit" class="btn btn-success">Submit Album</button>
               </form>
                </div>
             </div> 
@@ -373,63 +373,42 @@
                     <tr>
                       <th scope="col" class="sort" data-sort="name">Title</th>
                       <th scope="col" class="sort" data-sort="budget">Description</th>
-                      <th scope="col" class="sort" data-sort="status">Date</th>
-                      <th scope="col" class="sort" data-sort="status">Organizer</th>
-                      <th scope="col" class="sort" data-sort="status">Type</th>
-                      <th scope="col" class="sort" data-sort="status">Place</th>
-                      <th scope="col" class="sort" data-sort="status">Image</th>
+                       <th scope="col" class="sort" data-sort="status">MediaCatrgory</th>
+                      <th scope="col" class="sort" data-sort="status">Thumbnail</th>
                       <th scope="col" class="sort" data-sort="status">Actions</th>
                       <th scope="col" class="sort" data-sort="status">Actions</th>
                      
                     </tr>
                   </thead>
-                   {% for event in events %}
+                   {% for al in albums %}
                   <tbody class="list">
                     <tr>
                       <th scope="row">
                         <div class="media align-items-center">
                           <div class="media-body">
-                            <span class="name mb-0 text-sm">{{event.title}}</span>
+                            <span class="name mb-0 text-sm">{{al.title}}</span>
                           </div>
                         </div>
                       </th>
-                      <td style="white-space:pre-wrap; word-wrap:break-word" >
-                        {{event.description}}
+                      <td>
+                        {{al.description}}
                       </td>
                       <td>
-                        <span>
-                          <i></i>
-                          <span>{{event.date_event}}</span>
-                        </span>
+                        {{al.Category}}
                       </td>
                       <td>
-                        <div class="avatar-group">
-                         {{event.organizer}}
+                        <div class="d-flex align-items-center">
+                          <span class="completion mr-2"><img height="50px" width="50px" src="{{ al.thumbnail.url }}"></span>
                         </div>
                       </td>
                       <td>
                         <div class="d-flex align-items-center">
-                          <span class="completion mr-2"> {{event.type}}</span>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="d-flex align-items-center">
-                          <span class="completion mr-2">{{event.place}}</span>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="d-flex align-items-center">
-                          <span class="completion mr-2"><img height="50px" width="50px" src="{{ event.image.url }}"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="d-flex align-items-center">
-                          <span class="completion mr-2"><a class="btn btn-success" href="{% url 'dashboardeventsupdate' event.id %}">edit</a></span>
+                          <span class="completion mr-2"><a class="btn btn-success" href="{% url 'UpdateAlbum' al.id %}">edit</a></span>
                         </div>
                       </td>
                        <td>
                         <div class="d-flex align-items-center">
-                          <span class="completion mr-2"><a class="btn btn-danger" href="{% url 'dashboardeventsdelete' event.id %}">delete</a></span>
+                          <span class="completion mr-2"><a class="btn btn-danger" href="{% url 'DeleteAlbum' al.id %}">delete</a></span>
                         </div>
                       </td>
                       <td class="text-right">

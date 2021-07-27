@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="{% static '/Admin/vendor/@fortawesome/fontawesome-free/css/all.min.css'%}" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{% static '/Admin/css/argon.css'%}" type="text/css">
+  <link rel="stylesheet" href="{% static '/css/dsnaa.css' %}">
 </head>
 
 <body>
@@ -330,7 +331,7 @@
         <div class="row">
           <div class="col-lg-7 col-md-10">  
             <h1 class="display-2 text-white">Events</h1>
-            <a href="#!" class="btn btn-neutral">Add Event</a>
+            <a href="#!" class="btn btn-neutral">Add Media Category</a>
           </div>
         </div>
       </div>
@@ -343,7 +344,7 @@
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Add Event  </h3>
+                  <h3 class="mb-0">Add a Media Category  </h3>
                 </div>
                 <div class="col-4 text-right">
                   <a href="#!" class="btn btn-sm btn-primary">Settings</a>
@@ -353,68 +354,57 @@
             <div class="card-body">
               <form method="POST" enctype="multipart/form-data">
               {% csrf_token %}
-              {{form|crispy }}
-              <button type="submit" class="btn btn-success">Submit Event</button>
+              {{form|crispy}}
+              <button type="submit" class="btn btn-success">Submit Category</button>
               </form>
+               </div>
+            </div> 
+            </div>
               <br>
               <br>
+              <div class="col-xl-12 order-xl-1">
+              <div class="card">
+              <div class="card-body">
               <div class="table-responsive">
-                {% for event in events %}
+              
+               
                 <table class="table align-items-center table-flush">
                   <thead class="thead-light">
                     <tr>
                       <th scope="col" class="sort" data-sort="name">Title</th>
                       <th scope="col" class="sort" data-sort="budget">Description</th>
-                      <th scope="col" class="sort" data-sort="status">Date</th>
-                      <th scope="col" class="sort" data-sort="status">Organizer</th>
-                      <th scope="col" class="sort" data-sort="status">Type</th>
-                      <th scope="col" class="sort" data-sort="status">Place</th>
-                      <th scope="col" class="sort" data-sort="status">Image</th>
-                  
-                      <th scope="col"></th>
+                      <th scope="col" class="sort" data-sort="status">Thumbnail</th>
+                      <th scope="col" class="sort" data-sort="status">Actions</th>
+                      <th scope="col" class="sort" data-sort="status">Actions</th>
+                     
                     </tr>
                   </thead>
+                   {% for mc in mediacat %}
                   <tbody class="list">
                     <tr>
                       <th scope="row">
                         <div class="media align-items-center">
                           <div class="media-body">
-                            <span class="name mb-0 text-sm">{{event.title}}</span>
+                            <span class="name mb-0 text-sm">{{mc.title}}</span>
                           </div>
                         </div>
                       </th>
-                      <td >
-                        {{event.description}}
+                      <td>
+                        {{mc.description}}
                       </td>
                       <td>
-                        <span>
-                          <i></i>
-                          <span>{{event.date_event}}</span>
-                        </span>
-                      </td>
-                      <td>
-                        <div class="avatar-group">
-                         {{event.organizer}}
+                        <div class="d-flex align-items-center">
+                          <span class="completion mr-2"><img height="50px" width="50px" src="{{ mc.thumbnail.url }}"></span>
                         </div>
                       </td>
                       <td>
                         <div class="d-flex align-items-center">
-                          <span class="completion mr-2"> {{event.type}}</span>
+                          <span class="completion mr-2"><a class="btn btn-success" href="{% url 'UpdateMediadcategory' mc.id %}">edit</a></span>
                         </div>
                       </td>
-                      <td>
+                       <td>
                         <div class="d-flex align-items-center">
-                          <span class="completion mr-2">{{event.place}}</span>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="d-flex align-items-center">
-                          <span class="completion mr-2"><img height="50px" width="50px" src="{{ event.image.url }}"></span>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="d-flex align-items-center">
-                          <span class="completion mr-2"></span>
+                          <span class="completion mr-2"><a class="btn btn-danger" href="{% url 'DeleteMc' mc.id %}">delete</a></span>
                         </div>
                       </td>
                       <td class="text-right">
@@ -431,10 +421,14 @@
                       </td>
                     </tr>
                   </tbody>
-                </table>
-                {% endfor %}
-              </div>
+                  {% endfor %}
+                </table>        
                 
+                 </div>
+                </div>
+                </div>
+                </div>
+             
       <!-- Footer -->
       <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">
