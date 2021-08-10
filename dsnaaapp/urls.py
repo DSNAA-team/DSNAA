@@ -40,7 +40,9 @@ path("logout", views.logout_request, name="logout"),
 path("events", views.events, name="events"),
 path('event/<int:id>/',views.Eventdetails,name="eventdetails"),
 path("library", views.library, name="library"),
-path('media', views.media, name="media")
+path('media', views.media, name="media"),
+path('media/<int:id>/',views.mediapercategory,name="mediadetails"),
+path('album/<int:id>/',views.imagesperalbum,name="albumdetails"),
 
 
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

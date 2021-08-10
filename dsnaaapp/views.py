@@ -28,9 +28,26 @@ def index(request):
 
 
 def media(request):
+    mediacat = MediaCategory.objects.all()
+  
+    albums = Album.objects.all()
+    return render(request, "media.html", {'mediacat': mediacat , 'albums': albums } )
 
-    return render(request, "media.html")
+def mediapercategory(request,id):
+    mediacat = MediaCategory.objects.all()
+    mc = get_object_or_404(MediaCategory , pk=id)
+   
+  
+    albums = mc.album_set.all()
+    return render(request, "albumpercategory.html", {'mediacat': mediacat , 'albums': albums } )
 
+def imagesperalbum(request,id):
+    '''images = Image.objects.all()'''
+    album = get_object_or_404(Album , pk=id)
+   
+  
+    images = album.image_set.all()
+    return render(request, "imagesperalbum.html", {'images': images , 'album' : album  } )
 
 def library(request):
 

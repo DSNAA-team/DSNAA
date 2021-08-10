@@ -74,7 +74,7 @@
                                 <li>
                                     <a href="{% url 'mediadetails' mc.id %}" class="d-flex">
                                         <p>{{mc.title}}</p>
-                                        
+                                        <p>({{mc.album_set.count}})</p>
                                     </a>
                                 </li>
                              </ul>
