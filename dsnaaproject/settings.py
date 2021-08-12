@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'sorl.thumbnail',
     'crispy_forms',
-    'newsletter'
+    'newsletter',
+    'django_filters'
 ]
 
 
