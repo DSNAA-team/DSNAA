@@ -1,0 +1,238 @@
+{% load static %}
+{% load i18n %}
+
+{% include "base.html" %}
+
+
+<link rel="stylesheet" href="{% static 'registration/css/Masonry-gallery-cards-responsive.css' %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+   
+   <body>
+       
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="{% static '/img/logo/logo.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+       <div class="services-area">
+        <div class="container">
+            <!-- Section-tittle -->
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-8">
+                    <div class="section-tittle text-center mb-80">
+                        <span>Media</span>
+                        <h2>Our Media Area​</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<section class="blog_area section-paddingr">
+ 
+        <div class="container">
+        
+           
+            <p class="text-center">You can view instructions <a href="http://imagia-mu.com/DEV/BS/filterable-gallery/" target="_blank">here</a></p>
+        
+       <div class="row">
+          <div class="col-lg-9 mb-5 mb-lg-0">
+           
+          <div class="row" data-masonry="{&quot;percentPosition&quot;: true }">
+          {% for al in albums %}
+            <div class="col-sm-6 col-lg-4 mb-4">
+            
+                <div class="card">
+               
+                    <picture type="" srcset=""><img  width="100px" height="180px" class="card-img-top p-3" src="{{al.thumbnail.url}}" alt="" style="border-radius: 24px; object-fit: cover"></picture>
+                    <div class="card-body">
+                        <h5 class="card-title">{{al.title}}<br></h5>
+                        <p class="card-text text-muted">{{al.description}}<br></p><a href="{% url 'albumdetails' al.id%}">View</a>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            {% endfor %}
+              </div>
+        </div>
+     <div class="col-lg-3">
+     <div class="blog_right_sidebar">
+     <aside class="single_sidebar_widget post_category_widget">
+                            <h4 class="widget_title">Category</h4>
+                            {% for mc in mediacat %}
+                            <ul class="list cat-list">
+                                <li>
+                                    <a href="{% url 'mediadetails' mc.id %}" class="d-flex">
+                                        <p>{{mc.title}}</p>
+                                        
+                                    </a>
+                                </li>
+                             </ul>
+                             {% endfor %}
+                        </aside>
+     </div>
+     </div>
+     </div>
+     </div>
+    </section>
+   
+ 
+
+
+
+
+
+
+
+
+
+  <footer>
+
+       <!-- Footer Start-->
+      <div class="footer-main" data-background="{% static '/img/shape/footer_bg.png' %}">
+        <div class="footer-area footer-padding">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-lg-3 col-md-4 col-sm-8">
+                       <div class="single-footer-caption mb-50">
+                         <div class="single-footer-caption mb-30">
+                              <!-- logo -->
+                             <div class="footer-logo">
+                                 <a href="index.html"><img src="{% static '/img/logo/logo.png'%}" alt=""></a>
+                             </div>
+                             <div class="footer-tittle">
+                                 <div class="footer-pera">
+                                     <p class="info1">221B Baker Street, P.O Box 353 Park <br> Road, USA - 215431</p>
+                                     <p class="info2">info@yourdomain.com</p>
+                                </div>
+                             </div>
+                             <div class="footer-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-globe"></i></a>
+                                <a href="#"><i class="fab fa-behance"></i></a>
+                            </div>
+                         </div>
+                       </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Quick Links</h4>
+                                <ul>
+                                    <li><a href="about.html">About</a></li>
+                                    <li><a href="about.html">Features</a></li>
+                                    <li><a href="single-blog.html">Pricing</a></li>
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-7">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Support</h4>
+                                <ul>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><a href="#"> Sitemap</a></li>
+                                    <li><a href="#">FAQs</a></li>
+                                    <li><a href="#">Report a bugb</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Core Features</h4>
+                                <ul>
+                                 <li><a href="#">Email Marketing</a></li>
+                                 <li><a href="#"> Offline SEO</a></li>
+                                 <li><a href="#">Social Media Marketing</a></li>
+                                 <li><a href="#">Lead Generation</a></li>
+                                 <li><a href="#"> 24/7 Support</a></li>
+                             </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer-bottom aera -->
+        <div class="footer-bottom-area footer-bg">
+            <div class="container">
+                <div class="footer-border">
+                     <div class="row d-flex align-items-center">
+                         <div class="col-xl-12 ">
+                             <div class="footer-copy-right text-center">
+                                 <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | DSNAA </i></a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                             </div>
+                         </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+      </div>
+       <!-- Footer End-->
+
+   </footer>
+   
+	<!-- JS here -->
+	
+		<!-- All JS Custom Plugins Link Here here -->
+        <script src="{% static '/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+		<!-- Jquery, Popper, Bootstrap -->
+		<script src="{% static '/js/vendor/jquery-1.12.4.min.js' %}"></script>
+        <script src="{% static '/js/popper.min.js' %}"></script>
+        <script src="{% static '/js/bootstrap.min.js' %}"></script>
+	    <!-- Jquery Mobile Menu -->
+        <script src="{% static '/js/jquery.slicknav.min.js' %}"></script>
+
+		<!-- Jquery Slick , Owl-Carousel Plugins -->
+        <script src="{% static '/js/owl.carousel.min.js' %}"></script>
+        <script src="{% static '/js/slick.min.js' %}"></script>
+        <!-- Date Picker -->
+        <script src="{% static '/js/gijgo.min.js' %}"></script>
+		<!-- One Page, Animated-HeadLin -->
+        <script src="{% static '/js/wow.min.js' %}"></script>
+		<script src="{% static '/js/animated.headline.js' %}"></script>
+        <script src="{% static '/js/jquery.magnific-popup.js' %}"></script>
+
+		<!-- Scrollup, nice-select, sticky -->
+        <script src="{% static '/js/jquery.scrollUp.min.js' %}"></script>
+        <script src="{% static '/js/jquery.nice-select.min.js' %}"></script>
+		<script src="{% static '/js/jquery.sticky.js' %}"></script>
+        
+        <!-- contact js -->
+        <script src="{% static '/js/contact.js' %}"></script>
+        <script src="{% static '/js/jquery.form.js' %}"></script>
+        <script src="{% static '/js/jquery.validate.min.js' %}"></script>
+        <script src="{% static '/js/mail-script.js' %}"></script>
+        <script src="{% static '/js/jquery.ajaxchimp.min.js' %}"></script>
+        
+		<!-- Jquery Plugins, main Jquery -->	
+        <script src="{% static '/js/plugins.js' %}"></script>
+        <script src="{% static '/js/main.js' %}"></script>
+
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+    <script src="{% static 'registration/js/theme.js' %}"></script>
+    <script src="{% static 'registration/js/-Filterable-Gallery-with-Lightbox-BS4-.js' %}"></script>
+
+
+</body>
+</html>
