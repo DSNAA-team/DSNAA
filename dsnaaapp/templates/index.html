@@ -3,6 +3,7 @@
 {% load i18n %}
 
 {% include "base.html" %}
+
    <body>
        
     <!-- Preloader Start -->
@@ -310,7 +311,9 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid p-0">
+            {% include "partners.html" %}
+          
+           <!-- <div class="container-fluid p-0">
                 <div class="row ">
                     <div class="col-lg-3 col-md-4">
                         <div class="single-visited mb-30">
@@ -357,7 +360,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
         
         <!-- Visit Stuffs Start -->
@@ -392,19 +395,8 @@
                                                 <p>UIX designer</p>
                                             </div>
                                             </div>
-                                              <div class="testimonial-top-cap">
-                                                <p>AI hmz</p>
-                                            </div>
-                                            <!-- founder -->
-                                            <div class="testimonial-founder d-flex align-items-center justify-content-center">
-                                                <div class="founder-img">
-                                                     <img src="{% static '/img/visit/visit_4.jpg' %}" alt="">
-                                                </div>
-                                            <div class="founder-text">
-                                                <a href="#"><span>AI Library</span></a>
-                                                <p>UIX designer</p>
-                                            </div>
-                                            </div>
+                                              
+                                           
                                         </div>
                                     </div><!-- Single Testimonial -->
                                     <div class="single-testimonial text-center">
@@ -644,7 +636,7 @@
    </footer>
    
 	<!-- JS here -->
-	
+
 		<!-- All JS Custom Plugins Link Here here -->
         <script src="{% static '/js/vendor/modernizr-3.5.0.min.js' %}"></script>
 		<!-- Jquery, Popper, Bootstrap -->
@@ -680,5 +672,7 @@
         <script src="{% static '/js/plugins.js' %}"></script>
         <script src="{% static '/js/main.js' %}"></script>
         
+    
+            
     </body>
 </html>
