@@ -301,18 +301,18 @@ lan = (
 
 
 class Documents(models.Model):
-  
-    titre = models.CharField('Titre de document', max_length=20,unique=True)
+
+    titre = models.CharField('Titre de document', max_length=20, unique=True)
     autheur = models.CharField(max_length=20)
     organization = models.CharField(max_length=20)
     date_publication = models.DateField()
     fichier = models.FileField(null=True, upload_to='uploads/')
     lien = models.CharField(max_length=30)
-    mot_cle = models.CharField(null=True,max_length=30)
-    type_de_doc = models.CharField(null=True,max_length=50,choices=types)
-    pays = models.CharField(null=True,max_length=50,choices=pays)
-    strategie_national = models.CharField(null=True,max_length=10)
-    language = models.CharField(null=True,max_length=30,choices=lan)
+    mot_cle = models.CharField(null=True, max_length=30)
+    type_de_doc = models.CharField(null=True, max_length=50, choices=types)
+    pays = models.CharField(null=True, max_length=50, choices=pays)
+    strategie_national = models.CharField(null=True, max_length=10)
+    language = models.CharField(null=True, max_length=30, choices=lan)
 
     thumbnail = models.ImageField(null=True, upload_to='images/')
 
@@ -332,20 +332,28 @@ class Library(models.Model):
 
     def document_names(self):
         return "\n".join([p.titre for p in self.document.all()])
+
     def document_autheur(self):
         return "\n".join([p.autheur for p in self.document.all()])
+
     def document_thum(self):
         return "\n".join([p.thumbnail.path for p in self.document.all()])
+
     def document_org(self):
         return "\n".join([p.organization for p in self.document.all()])
+
     def document_Date(self):
         return "\n".join([p.date_publication.__str__() for p in self.document.all()])
+
     def document_Country(self):
         return "\n".join([p.get_pays_display.__str__() for p in self.document.all()])
+
     def document_lang(self):
         return "\n".join([p.get_language_display.__str__() for p in self.document.all()])
+
     def document_fich(self):
         return "\n".join([p.fichier.__str__() for p in self.document.all()])
+
     def __str__(self):
         return self.titre
 
@@ -353,26 +361,50 @@ class Library(models.Model):
 '''Class Galery '''
 
 
-class Gallery(models.Model):
-    date_creation = models.DateTimeField(auto_now_add=True)
-    titre = models.TextField(max_length=255)
+class MediaCategory(models.Model):
+    title = models.TextField(max_length=255)
+    description = models.TextField(max_length=255)
+    thumbnail = models.ImageField(null=True)
 
     def __str__(self):
-        return self.titre
+        return self.title
+
+
+
+
+class Album(models.Model):
+
+    title = models.TextField(max_length=255)
+    description = models.TextField(max_length=255)
+    date_creation = models.DateTimeField(auto_now_add=True)
+    thumbnail = models.ImageField(null=True)
+    Category = models.ForeignKey(MediaCategory, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+   
 
 
 '''Class Image '''
 
 
-class Image(models.Model):
-    titre = models.TextField(max_length=255)
-    description = models.TextField(max_length=500)
-    date_publication = models.DateTimeField(auto_now_add=True)
-    lieu = models.TextField(max_length=40)
-    image = models.ImageField()
-    gallery = models.ManyToManyField(Gallery)
+class Image(models.Model) : 
 
-    def __str__(self):
+    titre = models.TextField(max_length=255)
+
+    description = models.TextField(max_length=500)
+
+    date_publication = models.DateTimeField(auto_now_add=True)
+
+    lieu = models.TextField(max_length=40)
+
+    image = models.ImageField()
+
+    album = models.ForeignKey(Album, on_delete=models.CASCADE,null=True)
+
+    def __str__(self) :
+
         return self.titre
 
 
@@ -413,6 +445,38 @@ class Task(models.Model):
     description = models.TextField(null=True, blank=True)
     complete = models.BooleanField(default=False)
     create = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['complete']
+
+
+'''Class evenement'''
+
+
+class Event(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField(max_length=500)
+    date_event = models.DateField()
+    organizer = models.CharField(max_length=50)
+    type = models.CharField(max_length=50)
+    place = models.CharField(null=True, max_length=50)
+    image = models.ImageField(null=True, upload_to="images/")
+
+    def __str__(self):
+        return self.title
+
+
+'''Class fomrulaire contact'''
+
+
+class ContactForm(models.Model):
+    message = models.TextField()
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=50)
+    subject = models.CharField(max_length=100)
 
     def __str__(self):
         return self.title

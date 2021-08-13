@@ -1,5 +1,6 @@
 from django.forms.widgets import Select, SelectMultiple
 from dsnaaapp.models import ContactForm, Documents, Library
+from dsnaaapp.models import Album, ContactForm, Event, Image, MediaCategory
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms.models import ModelForm
@@ -30,6 +31,9 @@ class ContactF(ModelForm):
         model = ContactForm
         fields = '__all__'
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+     
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -329,6 +333,39 @@ class library_form(ModelForm):
             'document': forms.CheckboxSelectMultiple(),
         }
 
+class EventForm(ModelForm):
+	class Meta:
+		model = Event
+		fields = '__all__'
+		widgets = {
+            'date_event': DateInput()
+		
+        }
+
+
+class MediacatForm(ModelForm):
+	class Meta:
+		model = MediaCategory
+		fields = '__all__'
+		
+
+class AlbumForm(ModelForm):
+	class Meta:
+		model = Album
+		fields = '__all__'	
+		widgets = {
+            'date_creation': DateInput()
+		
+        }
+
+class ImageForm(ModelForm):
+	class Meta:
+		model = Image
+		fields = '__all__'	
+		widgets = {
+            'date_publication': DateInput()
+		
+        }	
 
 Roles = (
     ("1", "Admin"),
