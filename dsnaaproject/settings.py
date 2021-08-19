@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'sorl.thumbnail',
     'crispy_forms',
-    'newsletter'
+    'newsletter',
+    'django_filters'
 ]
 
 
@@ -164,6 +165,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SITE_ID = 1
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "image")
+MEDIA_URL = '/image/'
 LOGIN_URL = 'signin'

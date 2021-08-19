@@ -1,3 +1,10 @@
+import os
+from django.http.response import FileResponse, Http404
+from dsnaaapp.filters import DocFilter, LibFilter, LibraryFilter
+from dsnaaapp.models import ContactForm
+from django.contrib.auth import authenticate, login, logout
+from dsnaaapp.forms import ContactF, NewUserForm
+from django.shortcuts import get_list_or_404, get_object_or_404, render, redirect
 from django.urls.base import reverse
 from dsnaaapp.models import ContactForm
 from django.contrib.auth import authenticate, login, logout
@@ -12,6 +19,12 @@ from typing import List
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from .models import Blog, Documents, Library, Task
+from .forms import adminForm, documents_form, library_form
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy, reverse
 from .models import Album, Blog, Event, Image, MediaCategory, Task
 from .forms import AlbumForm, EventForm, ImageForm, MediacatForm, adminForm
 from django.views.generic.list import ListView
@@ -19,6 +32,8 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.decorators.csrf import csrf_exempt
+
 
 
 # Create your views here.
@@ -27,6 +42,49 @@ def index(request):
     return render(request, "index.html")
 
 
+def alldocum(request):
+    doc = Documents.objects.all()
+    myfilter = DocFilter(request.GET, queryset=doc)
+    doc = myfilter.qs
+    context = {'doc': doc,'myfilter':myfilter}
+
+    return render(request, "documents.html",context)
+
+def docum(request,id):
+    docs = Documents.objects.all()
+    projet = get_object_or_404(Library, pk=id)  # select where id
+    myfilter = LibFilter(request.GET, queryset=docs)
+    docs = myfilter.qs
+    images = projet.document.all()
+
+    context = {'p': projet,'docs':docs,'images':images,'myfilter':myfilter}
+    return render(request, "documents_detail.html",context)
+
+def docums(request,id):
+    doc = Documents.objects.all()
+    projet = get_object_or_404(Documents, pk=id)  # select where id
+    myfilter = DocFilter(request.GET, queryset=doc)
+    doc = myfilter.qs
+    context = {'p': projet,'doc':doc,'myfilter':myfilter}
+    return render(request, "Doc_One.html",context)
+
+def searchlib(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        lib = Library.objects.filter(titre__contains=searched)
+        return render(request, "searchlib.html", {'searched': searched, 'lib': lib})
+    else:
+        return render(request, "searchlib.html", {})
+
+
+def library(request):
+    doc = Documents.objects.all()
+    lib = Library.objects.all()
+    myfilter = LibraryFilter(request.GET, queryset=lib)
+    lib = myfilter.qs
+
+    context = {'lib': lib, 'doc': doc, 'myfilter': myfilter}
+    return render(request, "library.html", context)
 def media(request):
     mediacat = MediaCategory.objects.all()
   
@@ -49,9 +107,6 @@ def imagesperalbum(request,id):
     images = album.image_set.all()
     return render(request, "imagesperalbum.html", {'images': images , 'album' : album  } )
 
-def library(request):
-
-    return render(request, "index.html")
 
 
 def contact(request):
@@ -68,6 +123,7 @@ def contact(request):
 def blog(request):
 
     return render(request, "blog.html")
+
 
 def events(request):
     events = Event.objects.all()
@@ -317,6 +373,79 @@ def blogDashboard(request):
     return render(request, "Admin/examples/blogs.html", {'blogs': blogs})
 
 
+@csrf_exempt
+def docCreate(request):
+    doc = Documents.objects.all()
+    if request.method == "GET":
+        form = documents_form()
+        return render(request, 'dsnaaapp/documents_form.html', {'form': form, 'doc': doc})
+    if request.method == 'POST':
+        form = documents_form(request.POST, request.FILES)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.save()
+            return HttpResponseRedirect(reverse('createDoc'))
+        else:
+            return render(request, 'dsnaaapp/documents_form.html', {'form': form, 'doc': doc, 'msg_erreur': "Erreur d'ajout"})
+
+
+def UpdateD(request, pId):
+    Document = get_object_or_404(Documents, pk=pId)  # select where id
+    if request.method == "GET":
+        form = documents_form(instance=Document)
+        return render(request, "dsnaaapp/updateD.html", {"form": form, 'p_id': pId})
+    if request.method == 'POST':
+        form = documents_form(request.POST, request.FILES, instance=Document)
+        if form.is_valid():
+            form.save()  # flush in symphony
+            return HttpResponseRedirect(reverse('createDoc'))
+        else:
+            return render(request, 'dsnaaapp/updateD.html', {'form': form, 'p_id': pId, 'msg_erreur': "Erreur d'update"})
+
+
+def DeleteD(request, id):
+    Document = get_object_or_404(Documents, pk=id)  # select where id
+    Document.delete()
+    return HttpResponseRedirect(reverse('createDoc'))
+
+
+@csrf_exempt
+def libCreate(request):
+    doc = Documents.objects.all()
+    lib = Library.objects.all()
+    if request.method == "GET":
+        form = library_form()
+        return render(request, 'dsnaaapp/library_form.html', {'form': form, 'lib': lib, 'doc': doc})
+    if request.method == 'POST':
+        form = library_form(request.POST, request.FILES)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.save()
+            return HttpResponseRedirect(reverse('createLib'))
+        else:
+            return render(request, 'dsnaaapp/library_form.html', {'form': form, 'lib': lib, 'doc': doc, 'msg_erreur': "Erreur d'ajout"})
+
+
+def UpdateL(request, pId):
+    library = get_object_or_404(Library, pk=pId)  # select where id
+    if request.method == "GET":
+        form = library_form(instance=library)
+        return render(request, "dsnaaapp/updateL.html", {"form": form, 'p_id': pId})
+    if request.method == 'POST':
+        form = library_form(request.POST, request.FILES, instance=library)
+        if form.is_valid():
+            form.save()  # flush in symphony
+            return HttpResponseRedirect(reverse('createLib'))
+        else:
+            return render(request, 'dsnaaapp/updateL.html', {'form': form, 'p_id': pId, 'msg_erreur': "Erreur d'update"})
+
+
+def DeleteL(request, id):
+    library = get_object_or_404(Library, pk=id)  # select where id
+    library.delete()
+    return HttpResponseRedirect(reverse('createLib'))
+
+
 class taskList(LoginRequiredMixin, ListView):
     model = Task
     context_object_name = 'tasks'
@@ -358,3 +487,17 @@ class taskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     context_object_name = 'task'
     success_url = reverse_lazy('tasks')
+
+# Case 5 Limit file download type - recommended
+def file_response_download(request, file_path):
+    ext = os.path.basename(file_path).split('.')[-1].lower()
+    # cannot be used to download py, db and sqlite3 files.
+    if ext not in ['py', 'db',  'sqlite3']:
+        response = FileResponse(open(file_path, 'rb'))
+        response['content_type'] = "application/octet-stream"
+        response['Content-Disposition'] = 'attachment; filename=' + os.path.basename(file_path)
+        return response
+    else:
+        raise Http404
+
+# Map Test
