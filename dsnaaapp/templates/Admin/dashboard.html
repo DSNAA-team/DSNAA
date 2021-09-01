@@ -53,13 +53,13 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="{% static '/Admin/examples/login.html'%}" data-toggle="dropdown">
                 <i class="ni ni-key-25 text-info"></i>
-                <span class="nav-link-text">Library</span>
+                <span class="nav-link-text">Blog</span>
                 
               </a>
                <div class="dropdown-menu">
-                 <a class="dropdown-item" href="{% url 'blogDashboard' %}">Create Documents</a>
-                 <a class="dropdown-item" href="#">View Documents</a>
-                 <a class="dropdown-item" href="#">View Library</a>
+                 <a class="dropdown-item" href="{% url 'blogCreate' %}">Create Blog</a>
+                 <a class="dropdown-item" href="{% url 'blogDashboard' %}">View Blogs</a>
+                
                </div>
             </li>
 

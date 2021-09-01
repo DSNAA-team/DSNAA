@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
 from datetime import datetime
 from django.db.models.fields import NullBooleanField
+from tinymce.models import HTMLField
 
 
 
@@ -23,9 +24,10 @@ class Blog(models.Model) :
     autheur = models.ForeignKey(User,on_delete=CASCADE,null=True)
     titre = models.CharField(max_length=255,null=True)
     slug = models.SlugField(null=True)
-    content = models.TextField(max_length=2500,null=True)
+    content =  HTMLField(null=True)
     date_creation = models.DateTimeField(auto_now_add=True,null=True)
-    image = models.ImageField(null=True)
+    image = models.ImageField(null=True,upload_to = "images/")
+    blog_views = models.IntegerField(default=0)
     def __str__(self) :
         return self.titre
 
@@ -73,7 +75,7 @@ class Image(models.Model) :
     description = models.TextField(max_length=500)
     date_publication = models.DateTimeField(auto_now_add=True)
     lieu = models.TextField(max_length=40)
-    image = models.ImageField()
+    image = models.ImageField(upload_to = "images/")
     gallery = models.ManyToManyField(Gallery)
     def __str__(self) :
         return self.titre

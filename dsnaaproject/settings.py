@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'sorl.thumbnail',
     'crispy_forms',
-    'newsletter'
+    'newsletter',
+    'tinymce',
 ]
 
 
@@ -164,7 +165,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SITE_ID = 1
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'image')
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 LOGIN_URL = 'signin'
-MEDIA_URL = '/image/'
-LOGIN_URL = 'signin'
+MEDIA_URL = '/media/'
+MAILCHIMP_API_KEY = '89682b086b7548a7a053f026ce7567f0-us6'
+MAILCHIMP_DATA_CENTER = 'us6'
+MAILCHIMP_EMAIL_LIST_ID = 'cc5c008364'

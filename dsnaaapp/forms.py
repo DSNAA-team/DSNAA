@@ -1,10 +1,12 @@
-from dsnaaapp.models import ContactForm
+from dsnaaapp.models import ContactForm, Blog
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms.models import ModelForm
 from django import forms
 from django.db.models import fields
 from django.db.models.enums import Choices
+
+
 
 
 # Create your forms here.
@@ -48,3 +50,18 @@ class adminForm(UserCreationForm) :
     class Meta : 
         model = User    
         fields = ('first_name','last_name','email','username','poste','is_superuser','is_staff','password1','password2','role')
+
+
+
+class blogForm(ModelForm) : 
+	category = forms.Select()
+	autheur = forms.Select()
+	titre = forms.CharField(max_length=50)
+	slug = forms.CharField()
+	content =  forms.CharField()
+	image =  forms.ImageField()
+	class Meta : 
+		model = Blog
+		fields = ('category','autheur','titre','slug','content','image')
+		
+

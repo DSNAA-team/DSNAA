@@ -18,7 +18,6 @@
   <link rel="stylesheet" href="{% static '/Admin/vendor/@fortawesome/fontawesome-free/css/all.min.css'%}" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{% static '/Admin/css/argon.css'%}" type="text/css">
-   {{ form.media }}  
 </head>
 
 <body>
@@ -343,7 +342,7 @@
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Ajouter une blog </h3>
+                  <h3 class="mb-0">List of all the blogs</h3>
                 </div>
                 <div class="col-4 text-right">
                   <a href="#!" class="btn btn-sm btn-primary">Settings</a>
@@ -351,24 +350,74 @@
               </div>
             </div>
             <div class="card-body" >
-           
-              <form action="" method="POST" enctype="multipart/form-data">
-                
-                  {% csrf_token %}
-                  {{form|crispy}}
-              <button type="submit" class="btn btn-success">Submit blog</button>    
+                <div class="row">
+                    <div class="col-xl-8">
+                      <div class="card">
+                        <div class="card-header border-0">
+                          <div class="row align-items-center">
+                            <div class="col">
+                              <h3 class="mb-0">Blogs</h3>
+                            </div>
+                            <div class="col text-right">
+                              <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="table-responsive">
+                          <!-- Projects table -->
+                          <table class="table align-items-center table-flush">
+                              <thead>
+                                  <th>#</th>
+                                  <th>Author</th>
+                                  <th>Title</th>
+                                  <th>Slug</th>
+                                  <th>Content</th>
+                                  <th>Image</th>
+                                  <th>Date</th>
+                                  <th>Category</th>
+          
+                              </thead>
+                              <tbody>
+                                
+                              {% for blogs in blogs %}
+                                 <td><strong>{{ blogs.id }} </strong></td>
+                                 <td><strong>{{ blogs.autheur}}</strong></td>
+                                 <td><strong>{{ blogs.titre}}</strong></td>
+                                 <td><strong>{{ blogs.slug}}</strong></td>
+                                 <td><strong>{{ blogs.content}}</strong></td>
+                                 <td><img height="50px" width="50px" src="{{ blogs.image.url }}"></td>
+                                 <td><strong>{{ blogs.date_creation}}</strong></td>
+                                 <td><strong>{{ blogs.category.theme}}</strong></td>
+                                 <td class="text-right">
+                                  <div class="dropdown">
+                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <i class="fas fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                      <a class="dropdown-item" href="{% url 'blogDelete' blogs.id %}">Delete Blog</a>
+                                      <a class="dropdown-item" href="{% url 'blogUpdate' blogs.id %}">Update Blog</a>
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                             
+   
+</div>
+</body>    
+                              {% endfor %}
+                              </tbody>
+                              </table>
+                        </div>
+                    </div>
                 </div>
-              </form>
+                </div>
+                </div>
+                </div>
+                </div>             
             </div>
-            </div>
-            </div>
-            </div>
-              </div>
-              </div>
-              </div>
-              </div>
-              </div>             
-        </body>     
+            </div>    
+
+ 
                  
 
 
@@ -420,6 +469,5 @@
   <script src="{% static '/Admin/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js'%}"></script>
   <!-- Argon JS -->
   <script src="{% static '/Admin/js/argon.js'%}"></script>
-   
 
 </html>

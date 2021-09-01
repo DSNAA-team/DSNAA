@@ -1,23 +1,35 @@
+from dsnaaproject.settings import MAILCHIMP_API_KEY
+from django.contrib.auth.models import User
+from django.db.models import query
 from dsnaaapp.models import ContactForm
 from django.contrib.auth import authenticate, login, logout
-from dsnaaapp.forms import ContactF, NewUserForm
-from django.shortcuts import render, redirect
+from dsnaaapp.forms import ContactF, NewUserForm , blogForm
+from django.shortcuts import render, redirect ,get_object_or_404
 from django.utils.translation import gettext as _
 from django.utils.translation import get_language, activate, gettext
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from typing import List
 from django.contrib.auth import authenticate,login
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .models import Blog, Category,Task
 from .forms import adminForm
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView , UpdateView , DeleteView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy , reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count , Q
+from django.conf import settings
+
+
+MAILCHIMP_API_KEY = settings.MAILCHIMP_API_KEY
+MAILCHIMP_DATA_CENTER = settings.MAILCHIMP_DATA_CENTER
+MAILCHIMP_EMAIL_LIST_ID = settings.MAILCHIMP_EMAIL_LIST_ID
+
+ 
+
 
 
 # Create your views here.
@@ -41,13 +53,55 @@ def contact(request):
 		form = ContactF()
 	return render(request, 'contact.html', {'form': form})
 
-def blog(request):
+def is_valid_search_param(param) : 
+    return param != '' and param is not None
+
+
+def search(request) : 
+    categories = Category.objects.all()
+    filteredBlogs = Blog.objects.all()
+    recentPosts = Blog.objects.all().order_by('-date_creation')
+    title_contains = request.GET.get('title_contains')
+    title_or_author = request.GET.get('title_or_author')
+    date_min = request.GET.get('date_min')
+    date_max = request.GET.get('date_max')
+    category = request.GET.get('category')
+
+    if is_valid_search_param(title_contains != '') :  
+        filteredBlogs = filteredBlogs.filter(titre__icontains = title_contains)
+
+    elif is_valid_search_param(title_or_author !=  '') : 
+        filteredBlogs = filteredBlogs.filter(Q(titre__icontains=title_or_author) | Q(autheur__username__icontains=title_or_author)).distinct()
+
+
+    if is_valid_search_param(date_min) : 
+        filteredBlogs = filteredBlogs.filter(date_creation__gte=date_min)
     
-   
-    return render(request, "blog.html" )     
+    if is_valid_search_param(date_max) : 
+        filteredBlogs = filteredBlogs.filter(date_creation__lt=date_max)
+
+    if is_valid_search_param(category) : 
+        filteredBlogs = filteredBlogs.filter(category__theme__icontains=category)
+
+    params = {'filteredBlogs' : filteredBlogs , 'categories' : categories , 'recentPosts' : recentPosts}
+    return render(request,"blogSearched.html",params)
 
 
-def events(request):
+def blog(request):    
+    blogs = Blog.objects.all()
+    categories = Category.objects.all().annotate(posts_count=Count('blog'))
+    recentPosts = Blog.objects.all().order_by('-date_creation')
+    return render(request, "blog.html",{"blogs" : blogs , "categories" : categories , "recentPosts" : recentPosts})
+  
+def blogDetail(request , pk = None) :
+    blog=get_object_or_404(Blog,id=pk)
+    blog.blog_views = blog.blog_views+1
+    context={'blog':blog}
+    blog.save()
+    return render(request,'blogDetail.html',context)    
+
+
+def events(request): 
     
    
     return render(request, "events.html" )   	
@@ -128,13 +182,52 @@ def register(response) :
 
 
 def users(request) : 
-    return render(request, "Admin/examples/users.html")
+    users = User.objects.all().filter(is_superuser=False)
+    return render(request, "Admin/examples/users.html",{"users":users})
+
+
 
 
 def blogDashboard(request) : 
     blogs = Blog.objects.all()
-    return render(request, "Admin/examples/blogs.html",{'blogs':blogs})
+    return render(request, "Admin/examples/blogsDisplay.html",{"blogs":blogs})
 
+ 
+ 
+def blogCreate(request):
+	if request.method == "POST":
+		form = blogForm(request.POST,request.FILES)
+		if form.is_valid():
+		 form.save() 
+	else:
+		form = blogForm()
+	return render(request, "Admin/examples/blogs.html", {"form": form})
+  
+
+def blogDelete(request , pk = None) : 
+    blogs = Blog.objects.get(id=pk)
+    blogs.delete()
+    return HttpResponseRedirect(reverse('blogDashboard'))
+
+
+def blogUpdate(request, pk =  None):
+    blog = get_object_or_404(Blog, id=pk)
+    if request.method == 'GET':
+        form = blogForm(instance=blog)
+        return render(request, 'Admin/examples/blogUpdate.html', {'form': form , 'id' : id})
+
+
+    if request.method == 'POST':
+        form = blogForm(request.POST, instance=blog)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('blogDashboard'))
+
+        else:
+            return render(request, 'Admin/examples/blogsDisplay.html',
+                          {'form': form,
+                           'msg_erreur': "Erreur d'update"}
+                          )
 
 
 class taskList(LoginRequiredMixin,ListView) :

@@ -6245,7 +6245,7 @@ input[type='button'].btn-block
     flex-direction: column;
 
     min-width: 0;
-
+    
     word-wrap: break-word;
 
     border: 1px solid rgba(0, 0, 0, .05);
@@ -6273,7 +6273,7 @@ input[type='button'].btn-block
 {
     min-height: 1px;
     padding: 1.5rem; 
-
+    width: 800px;
     flex: 1 1 auto;
 }
 
