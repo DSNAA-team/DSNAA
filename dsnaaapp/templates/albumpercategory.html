@@ -48,7 +48,7 @@
           <div class="col-lg-9 mb-5 mb-lg-0">
            
           <div class="row" data-masonry="{&quot;percentPosition&quot;: true }">
-          {% for al in albums %}
+          {% for al in page_obj %}
             <div class="col-sm-6 col-lg-4 mb-4">
             
                 <div class="card">
@@ -87,6 +87,40 @@
     </section>
    
  
+
+<div class="col-4 offset-4">
+  <nav aria-label="...">
+    <ul class="pagination">
+
+      {% if page_obj.has_previous%}
+        <li class="page-item">
+          <a href="?page={{ page_obj.previous_page_number }}" class="page-link">Previous</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">Previous</span>
+        </li>
+      {% endif %}
+
+      <li class="page-item">
+        <a class="page-link" href="#">{{ page_obj.number }}</a>
+      </li>
+
+    <!-- new -->
+    {% if page_obj.has_next %}
+      <li class="page-item ">
+        <a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">Next</span>
+      </li>
+    {% endif %}
+    <!--/new -->
+
+    </ul>
+  </nav>
+</div>
 
 
 

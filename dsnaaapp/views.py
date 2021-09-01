@@ -33,6 +33,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator
 
 
 
@@ -89,7 +90,10 @@ def media(request):
     mediacat = MediaCategory.objects.all()
   
     albums = Album.objects.all()
-    return render(request, "media.html", {'mediacat': mediacat , 'albums': albums } )
+    paginator = Paginator(albums, 6)
+    page_number = request.GET.get('page')  # new
+    page_obj = paginator.get_page(page_number)
+    return render(request, "media.html", {'mediacat': mediacat , 'page_obj': page_obj } )
 
 def mediapercategory(request,id):
     mediacat = MediaCategory.objects.all()
@@ -97,7 +101,10 @@ def mediapercategory(request,id):
    
   
     albums = mc.album_set.all()
-    return render(request, "albumpercategory.html", {'mediacat': mediacat , 'albums': albums } )
+    paginator = Paginator(albums, 6)
+    page_number = request.GET.get('page')  # new
+    page_obj = paginator.get_page(page_number)
+    return render(request, "albumpercategory.html", {'mediacat': mediacat , 'page_obj': page_obj } )
 
 def imagesperalbum(request,id):
     '''images = Image.objects.all()'''
@@ -127,8 +134,12 @@ def blog(request):
 
 def events(request):
     events = Event.objects.all()
-   
-    return render(request, "events.html", {'events': events} )
+    paginator = Paginator(events, 6)
+    page_number = request.GET.get('page')  # new
+    page_obj = paginator.get_page(page_number)
+    
+
+    return render(request, "events.html", {'page_obj': page_obj} )
 
 
 '''event crud start'''

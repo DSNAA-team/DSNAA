@@ -58,7 +58,7 @@
                            
                            
                             <div class="form-group mt-3">
-                                <button type="submit" class="button button-contactForm boxed-btn">Send</button>
+                                <button type="submit" onclick="myFunction()" class="button button-contactForm boxed-btn">Send</button>
                             </div>
                          
                         </form>
@@ -211,7 +211,12 @@
    </footer>
 
     <!-- JS here -->
-	
+        <script>
+function myFunction() {
+  alert("Message sent !");
+}
+</script>
+
 		<!-- All JS Custom Plugins Link Here here -->
         <script src="{% static '/js/vendor/modernizr-3.5.0.min.js' %}"></script>
 		<!-- Jquery, Popper, Bootstrap -->
