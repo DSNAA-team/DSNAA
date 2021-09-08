@@ -1,0 +1,323 @@
+{% include "base.html" %}
+{% load static %}
+{% load i18n %}
+
+<head>
+    <meta charset="utf-8">
+      {% comment %} <base href=""></base> {% endcomment %}
+    <!-- including ECharts file -->
+    <script src="{% static 'echarts/dist/echarts.min.js' %}"></script>
+</head>
+
+ <link rel="stylesheet" href="{% static 'registration/css/Latest-Events.css' %}">
+   <body>
+       
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="{% static '/img/logo/logo.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+
+
+
+
+
+
+     <!-- Slider Area Start-->
+    
+        <div class="container">
+            <!-- Section-tittle -->
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-8">
+                    <div class="section-tittle text-center mb-80">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+
+    <section><div class="blog-home2 py-5">
+  <div class="container">
+    <!-- Row  -->
+    <div class="row justify-content-center">
+      <!-- Column -->
+      <div class="col-md-8 text-center">
+        <h3 class="my-3">AI Map</h3>
+{% comment %}         <h6 class="subtitle font-weight-normal">You can relay on our amazing features list and also our customer services will be great experience for you without doubt</h6>
+ {% endcomment %}      </div>
+      <!-- Column -->
+     {% comment %}  <div id="main" style="width: 1200px;height:800px;"></div> {% endcomment %}
+    
+
+<div id="main" style="width: 1400px; height: 777px;"></div>
+
+<script src="{% static 'echarts/dist/echarts.min.js' %}"></script>
+
+<script type="module">
+
+
+var chartDom = document.getElementById('main');
+var myChart = echarts.init(chartDom);
+var option;
+
+myChart.showLoading();
+
+
+
+$.get('https://s3-us-west-2.amazonaws.com/s.cdpn.io/95368/world.json', function (usaJson) {
+    myChart.hideLoading();
+
+    echarts.registerMap('USA', usaJson, {
+        Alaska: {              // 把阿拉斯加移到美国主大陆左下方
+            left: -131,
+            top: 25,
+            width: 15
+        },
+        Hawaii: {
+            left: -110,        // 夏威夷
+            top: 28,
+            width: 5
+        },
+        'Puerto Rico': {       // 波多黎各
+            left: -76,
+            top: 26,
+            width: 2
+        }
+    });
+    option = {
+        title: {
+            text: 'AI Strategies',
+            subtext: '',
+            sublink: '',
+            left: 'right'
+        },
+        tooltip: {
+            trigger: 'item',
+            showDelay: 0,
+            transitionDuration: 0.2,
+            formatter: function (params) {
+                var value = (params.value + '').split('.');
+           
+                value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,');
+                return params.name + '<br/>' + params.seriesName + ': ' + value;
+            }
+        },
+        visualMap: {
+            left: 'right',
+            min: 0,
+            max: 2,
+            inRange: {
+                color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+            },
+            text: ['High', 'Low'],           // 文本，默认为数值文本
+            calculable: true
+        },
+        toolbox: {
+            show: true,
+            //orient: 'vertical',
+            left: 'left',
+            top: 'top',
+            feature: {
+                dataView: {readOnly: false},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        series: [
+            {
+                name: 'AI Strategies',
+                type: 'map',
+                roam: true,
+                map: 'USA',
+                emphasis: {
+                    label: {
+                        show: true
+                    }
+                },
+                // 文本位置修正
+                textFixed: {
+   
+                },
+                data:[
+                
+
+
+                    
+                ]
+            }
+        ]
+    };
+
+    myChart.setOption(option);  
+});
+
+option && myChart.setOption(option);
+
+</script>
+
+      <!-- Column -->
+    </div>
+    <div class="row mt-4">
+     
+      <!-- Column -->
+       
+      <!-- Column -->
+      
+      
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+    <!-- Footer Start-->
+      <div class="footer-main" data-background="{% static '/img/shape/footer_bg.png' %}">
+        <div class="footer-area footer-padding">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-lg-3 col-md-4 col-sm-8">
+                       <div class="single-footer-caption mb-50">
+                         <div class="single-footer-caption mb-30">
+                              <!-- logo -->
+                             <div class="footer-logo">
+                                 <a href="index.html"><img src="{% static '/img/logo/logo.png'%}" alt=""></a>
+                             </div>
+                             <div class="footer-tittle">
+                                 <div class="footer-pera">
+                                     <p class="info1">221B Baker Street, P.O Box 353 Park <br> Road, USA - 215431</p>
+                                     <p class="info2">info@yourdomain.com</p>
+                                </div>
+                             </div>
+                             <div class="footer-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-globe"></i></a>
+                                <a href="#"><i class="fab fa-behance"></i></a>
+                            </div>
+                         </div>
+                       </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Quick Links</h4>
+                                <ul>
+                                    <li><a href="about.html">About</a></li>
+                                    <li><a href="about.html">Features</a></li>
+                                    <li><a href="single-blog.html">Pricing</a></li>
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-7">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Support</h4>
+                                <ul>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><a href="#"> Sitemap</a></li>
+                                    <li><a href="#">FAQs</a></li>
+                                    <li><a href="#">Report a bugb</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Core Features</h4>
+                                <ul>
+                                 <li><a href="#">Email Marketing</a></li>
+                                 <li><a href="#"> Offline SEO</a></li>
+                                 <li><a href="#">Social Media Marketing</a></li>
+                                 <li><a href="#">Lead Generation</a></li>
+                                 <li><a href="#"> 24/7 Support</a></li>
+                             </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer-bottom aera -->
+        <div class="footer-bottom-area footer-bg">
+            <div class="container">
+                <div class="footer-border">
+                     <div class="row d-flex align-items-center">
+                         <div class="col-xl-12 ">
+                             <div class="footer-copy-right text-center">
+                                 <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | DSNAA </i></a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                             </div>
+                         </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+      </div>
+       <!-- Footer End-->
+
+   </footer>
+   
+	<!-- JS here -->
+	
+		<!-- All JS Custom Plugins Link Here here -->
+        <script src="{% static '/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+		<!-- Jquery, Popper, Bootstrap -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="{% static '/js/popper.min.js' %}"></script>
+        <script src="{% static '/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'registration/js/jquery.min.js' %}"></script>
+    <script src="{% static 'registration/bootstrap/js/bootstrap.min.js' %}"></script>
+	    <!-- Jquery Mobile Menu -->
+        <script src="{% static '/js/jquery.slicknav.min.js' %}"></script>
+
+        <!-- Jquery Slick , Owl-Carousel Plugins -->
+        <script src="{% static '/js/owl.carousel.min.js' %}"></script>
+        <script src="{% static '/js/slick.min.js' %}"></script>
+        <!-- Date Picker -->
+        <script src="{% static '/js/gijgo.min.js' %}"></script>
+		<!-- One Page, Animated-HeadLin -->
+        <script src="{% static '/js/wow.min.js' %}"></script>
+		<script src="{% static '/js/animated.headline.js' %}"></script>
+        <script src="{% static '/js/jquery.magnific-popup.js' %}"></script>
+
+		<!-- Scrollup, nice-select, sticky -->
+        <script src="{% static '/js/jquery.scrollUp.min.js' %}"></script>
+        <script src="{% static '/js/jquery.nice-select.min.js' %}"></script>
+		<script src="{% static '/js/jquery.sticky.js' %}"></script>
+        
+        <!-- contact js -->
+        <script src="{% static '/js/contact.js' %}"></script>
+        <script src="{% static '/js/jquery.form.js' %}"></script>
+        <script src="{% static '/js/jquery.validate.min.js' %}"></script>
+        <script src="{% static '/js/mail-script.js' %}"></script>
+        <script src="{% static '/js/jquery.ajaxchimp.min.js' %}"></script>
+        
+		<!-- Jquery Plugins, main Jquery -->	
+        <script src="{% static '/js/plugins.js' %}"></script>
+        <script src="{% static '/js/main.js' %}"></script>
+        
+    </body>
+</html>

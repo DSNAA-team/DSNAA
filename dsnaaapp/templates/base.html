@@ -25,6 +25,7 @@
             <link rel="stylesheet" href="{% static '/css/nice-select.css' %}">
             <link rel="stylesheet" href="{% static '/css/style.css' %}">
             <link rel="stylesheet" href="{% static '/css/dsnaa.css' %}">
+            <link rel="stylesheet" href="{% static '/map.json' %}">
             
            
             <link rel="stylesheet" href="{% static '/css/styles.css' %}">
@@ -58,7 +59,7 @@
                                     </li>
                                     <li><a href="#projects">Projects</a>
                                         <ul class="submenu">
-                                            <li><a href="elements.html">AI Map</a></li>
+                                            <li><a href="{% url 'aimap' %}">AI Map</a></li>
                                             <li><a href="elements.html">AI Network</a></li>
                                             <li><a href="elements.html">AI Quiz</a></li>
                                             <li><a href="{% url 'library' %}">AI E-library</a></li>

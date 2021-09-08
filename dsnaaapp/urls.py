@@ -54,6 +54,7 @@ path('event/<int:id>/',views.Eventdetails,name="eventdetails"),
 path('media', views.media, name="media"),
 path('media/<int:id>/',views.mediapercategory,name="mediadetails"),
 path('album/<int:id>/',views.imagesperalbum,name="albumdetails"),
+path('aimap',views.aimap,name="aimap"),
 re_path(r'^uploads/(?P<file_path>.*)/$', views.file_response_download, name='file_download'),
 
 

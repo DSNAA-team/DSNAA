@@ -279,7 +279,7 @@ pays = (
     ("233", "Tokelau"),
     ("234", "Tonga"),
     ("235", "Trinité et tobago"),
-    ("236", "Tunisie"),
+    ("236", "Tunisia"),
     ("237", "Turkménistan"),
     ("238", "Turks et caïcos, îles"),
     ("239", "Turquie"),

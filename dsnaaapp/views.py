@@ -130,7 +130,12 @@ def events(request):
    
     return render(request, "events.html", {'events': events} )
 
-
+def aimap(request):
+    aimap = Documents.objects.all()
+   
+    return render(request, "aimap.html", {'aimap': aimap} ) 
+"""                         change here for aimap 
+ """
 '''event crud start'''
 def eventsDashboard(request):
     events = Event.objects.all()
