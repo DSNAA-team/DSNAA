@@ -1,7 +1,8 @@
-
+{% include "base.html" %}
 {% load static %}
 {% load i18n %}
 
+{% include "base.html" %}
 
    <body>
        
@@ -18,7 +19,7 @@
     </div>
     <!-- Preloader Start -->
 
-{% include "base.html" %}
+
 
 
     <main>
@@ -133,20 +134,33 @@
         <!-- We Create Start -->
         <div id="objectives" class="we-create-area create-padding">
             <div class="container">
-                <div class="row d-flex align-items-end">
-                    <div class="col-lg-6 col-md-12">
-                        <div class="we-create-img">
-                            <img src="{% static '/img//service/we-create.png' %}" alt="">
+              <div class="row d-flex justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="section-tittle text-center">
+                            <h2>Our Objectives </h2>
+                            <p>Our Mission is to empower people and governments to embrace Artificial Intelligence so they can impact their communities and promote a Data-Driven economies (vision) through a humain and trustworthy technologies (Values)</p>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-12">
+                </div>
+                <div class="row d-flex align-items-end">
+                    <div class="col-md-4">
                         <div class="we-create-cap">
-                            <h3>Our Objectives</h3>
-                           <p>Our Mission is to empower people and governments to embrace Artificial Intelligence so they can impact their communities and promote a Data-Driven economies (vision) through a humain and trustworthy technologies (Values)</p>
+                            
                            <p><i class="fa fa-check" aria-hidden="true"></i> Helping North African countries and the Arab world to build AI strategies.</p>
                            <p><i class="fa fa-check" aria-hidden="true"></i> Building the capacity of researchers, students and youth in data science issues</p>
                            <p><i class="fa fa-check" aria-hidden="true"></i> Encouraging cooperation between industry, universities, and scientific research sectors.</p>
                            <p><i class="fa fa-check" aria-hidden="true"></i> Promoting research activities related to data science in North African countries and the Arab world.</p>
+                           
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="we-create-img">
+                            <img src="{% static '/img//service/we-create.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="we-create-cap">
+                         
                            <p><i class="fa fa-check" aria-hidden="true"></i> Foster the promotion of AI ecosystem in North Africa and Arab countries.<p>
                            <p><i class="fa fa-check" aria-hidden="true"></i> Raising awareness about data science among governments, women and youth.</p>
                            <p><i class="fa fa-check" aria-hidden="true"></i> Supporting the implementation of Ai “uses-cases” in both public and private sector</p>
@@ -297,7 +311,9 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid p-0">
+            {% include "partners.html" %}
+          
+           <!-- <div class="container-fluid p-0">
                 <div class="row ">
                     <div class="col-lg-3 col-md-4">
                         <div class="single-visited mb-30">
@@ -344,8 +360,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>-->
+            </div>-->
+        </div>
+        
         <!-- Visit Stuffs Start -->
          <!-- Testimonial Start -->
          <div  class="testimonial-area">
@@ -378,6 +395,8 @@
                                                 <p>UIX designer</p>
                                             </div>
                                             </div>
+                                              
+                                           
                                         </div>
                                     </div><!-- Single Testimonial -->
                                     <div class="single-testimonial text-center">
@@ -388,10 +407,44 @@
                                             <!-- founder -->
                                             <div class="testimonial-founder d-flex align-items-center justify-content-center">
                                                 <div class="founder-img">
-                                                    <img src="{% static '/img/visit/visit_2.jpg' %}" alt="">
+                                                    <img src="{% static '/img/visit/visit_3.jpg' %}" alt="">
                                                 </div>
                                             <div class="founder-text">
                                                 <a href="#"><span>AI Network</span></a>
+                                                <p>UIX designer</p>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-testimonial text-center">
+                                        <div class="testimonial-caption ">
+                                            <div class="testimonial-top-cap">
+                                                <p>AI Map</p>
+                                            </div>
+                                            <!-- founder -->
+                                            <div class="testimonial-founder d-flex align-items-center justify-content-center">
+                                                <div class="founder-img">
+                                                    <img src="{% static '/img/visit/visit_2.jpg' %}" alt="">
+                                                </div>
+                                            <div class="founder-text">
+                                                <a href="#"><span>AI Map</span></a>
+                                                <p>UIX designer</p>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-testimonial text-center">
+                                        <div class="testimonial-caption ">
+                                            <div class="testimonial-top-cap">
+                                                <p>AI Quiz</p>
+                                            </div>
+                                            <!-- founder -->
+                                            <div class="testimonial-founder d-flex align-items-center justify-content-center">
+                                                <div class="founder-img">
+                                                    <img src="{% static '/img/visit/visit_1.jpg' %}" alt="">
+                                                </div>
+                                            <div class="founder-text">
+                                                <a href="#"><span>AI Quiz</span></a>
                                                 <p>UIX designer</p>
                                             </div>
                                             </div>
@@ -419,36 +472,36 @@
                     <div class="col-xl-3 col-lg-3 col-md-6">
                         <div class="single-tips mb-50">
                             <div class="tips-img">
-                                <img src="{% static '/img/tips/mrkais.jpg' %}" alt="">
+                                <img  height="250px" width="50px" src="{% static '/img/tips/mrkais.jpg' %}" alt="">
                             </div>
                             <div class="tips-caption">
                                 <h4><a href="#">Kais Mejri</a></h4>
                                 <span>Secretary general</span>
-                                <p>March 3, 2020</p>
+                                
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-6">
                         <div class="single-tips mb-50">
                             <div class="tips-img">
-                                <img src="{% static '/img/tips/tips_2.jpg' %}" alt="">
+                                <img height="250px" width="50px" src="{% static '/img/tips/mrkarim.jpg' %}" alt="">
                             </div>
                             <div class="tips-caption">
-                                <h4><a href="#">Twice profit than before you ever got</a></h4>
-                                <span>Continue Reading</span>
-                                <p>March 3, 2020</p>
+                                <h4><a href="#">Karim Bguir</a></h4>
+                                <span>President </span>
+                               
                             </div>
                         </div>
                     </div>
                      <div class="col-xl-3 col-lg-3 col-md-6">
                         <div class="single-tips mb-50">
                             <div class="tips-img">
-                                <img src="{% static '/img/tips/tips_3.jpg' %}" alt="">
+                                <img height="250px" width="50px" src="{% static '/img/tips/tips_3.jpg' %}" alt="">
                             </div>
                             <div class="tips-caption">
                                 <h4><a href="#">Twice profit than before you ever got</a></h4>
                                 <span>Continue Reading</span>
-                                <p>March 3, 2020</p>
+                                
                             </div>
                         </div>
                     </div>
@@ -583,7 +636,7 @@
    </footer>
    
 	<!-- JS here -->
-	
+
 		<!-- All JS Custom Plugins Link Here here -->
         <script src="{% static '/js/vendor/modernizr-3.5.0.min.js' %}"></script>
 		<!-- Jquery, Popper, Bootstrap -->
@@ -619,5 +672,7 @@
         <script src="{% static '/js/plugins.js' %}"></script>
         <script src="{% static '/js/main.js' %}"></script>
         
+    
+            
     </body>
 </html>

@@ -24,7 +24,7 @@
   <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
     <div class="container">
       <a class="navbar-brand" href="dashboard.html">
-        <img src="{% static '/Admin/img/brand/white.png' % }">
+        <img src="{% static '/Admin/img/brand/white.png' %}">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -34,7 +34,7 @@
           <div class="row">
             <div class="col-6 collapse-brand">
               <a href="dashboard.html">
-                <img src="{% static '/Admin/img/brand/blue.png' % }">
+                <img src="{% static '/Admin/img/brand/blue.png' %}">
               </a>
             </div>
             <div class="col-6 collapse-close">
@@ -57,7 +57,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="register.html" class="nav-link">
+            <a href="{% url 'singup' %}" class="nav-link">
               <span class="nav-link-inner--text">Register</span>
             </a>
           </li>
@@ -133,7 +133,7 @@
                   <span class="btn-inner--text">Github</span>
                 </a>
                 <a href="#" class="btn btn-neutral btn-icon">
-                  <span class="btn-inner--icon"><img src="{% static '/Admin/img/icons/common/google.svg' % }"></span>
+                  <span class="btn-inner--icon"><img src="{% static '/Admin/img/icons/common/google.svg' %}"></span>
                   <span class="btn-inner--text">Google</span>
                 </a>
               </div>
@@ -179,7 +179,7 @@
               <a href="#" class="text-light"><small>Forgot password?</small></a>
             </div>
             <div class="col-6 text-right">
-              <a href="#" class="text-light"><small>Create new account</small></a>
+              <a href="{% url 'singup' %}" class="text-light"><small>Create new account</small></a>
             </div>
           </div>
         </div>

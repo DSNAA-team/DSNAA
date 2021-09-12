@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'newsletter',
     'tinymce',
+    'django_filters'
 ]
 
 

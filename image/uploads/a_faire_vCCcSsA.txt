@@ -1,0 +1,22 @@
+mot-cle
+
+type de doc (statique)
+
+nature de contenu (technoligique , secteur ..... )
+
+langue (statique)
+
+pays de publication (statique)
+
+strategie national oui ou nn (affichage fel map)
+
+library ==> Category 
+
+
+-------------------------------------
+
+map , doc par pays
+
+
+media library (copie coller library)
+

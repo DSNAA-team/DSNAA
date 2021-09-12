@@ -25,6 +25,10 @@
             <link rel="stylesheet" href="{% static '/css/nice-select.css' %}">
             <link rel="stylesheet" href="{% static '/css/style.css' %}">
             <link rel="stylesheet" href="{% static '/css/dsnaa.css' %}">
+            <link rel="stylesheet" href="{% static '/map.json' %}">
+            
+           
+            <link rel="stylesheet" href="{% static '/css/styles.css' %}">
    </head>
 
 <header>
@@ -55,14 +59,14 @@
                                     </li>
                                     <li><a href="#projects">Projects</a>
                                         <ul class="submenu">
-                                            <li><a href="elements.html">AI Map</a></li>
+                                            <li><a href="{% url 'aimap' %}">AI Map</a></li>
                                             <li><a href="elements.html">AI Network</a></li>
                                             <li><a href="elements.html">AI Quiz</a></li>
                                             <li><a href="{% url 'library' %}">AI E-library</a></li>
                                             <li><a href="elements.html">AI Media</a></li>
                                         </ul>
                                     </li>
-                                    <li><a htef="/contact"  >Media</a></li>
+                                    <li><a href="{% url 'media' %}"  >Media</a></li>
                                     <li><a href="{% url 'events' %}"  >Agenda</a></li>
                                     <li><a href="/blog">Blog</a>
                                         <ul class="submenu">
@@ -90,7 +94,7 @@
                             <div class="header-right-btn f-right d-none d-lg-block">
                             {% if user.is_authenticated %}
                         
-                                Welcome {{ user.username }} 
+                                <h6><small><i class="bi bi-file-person-fill"></i>{{ user.username }}</small> </h6>
                                 <a href="{% url 'logout' %}" class="btn header-btn">Log out</a>
                                 {% else %}
                                 <div class="col-xl-0 col-lg-1 col-md-1">
